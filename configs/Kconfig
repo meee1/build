@@ -1,0 +1,24 @@
+#
+# For a description of the syntax of this configuration file,
+# see the file kconfig-language.txt in the NuttX tools repository.
+#
+
+choice
+	prompt "Select target board"
+	default ARCH_BOARD_U1
+	---help---
+		Select the board hosting the architecture.  You must first select the
+		exact MCU part number, then the boards supporting that part will
+		be available for selection.  Use ARCH_BOARD_CUSTOM to create a new
+		board configuration.
+
+config ARCH_BOARD_U1
+	bool "Pinecone U1"
+	---help---
+		Pinecone U1 MCU.
+
+endchoice
+
+if ARCH_BOARD_U1
+source "configs/song/u1/Kconfig"
+endif
