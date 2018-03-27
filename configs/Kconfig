@@ -12,6 +12,16 @@ choice
 		be available for selection.  Use ARCH_BOARD_CUSTOM to create a new
 		board configuration.
 
+config ARCH_BOARD_ABIES
+	bool "Pinecone Abies"
+	---help---
+		Pinecone Abies SoC.
+
+config ARCH_BOARD_BANKS
+	bool "Pinecone Banks"
+	---help---
+		Pinecone Banks SoC.
+
 config ARCH_BOARD_U1
 	bool "Pinecone U1"
 	---help---
@@ -19,6 +29,12 @@ config ARCH_BOARD_U1
 
 endchoice
 
+if ARCH_BOARD_ABIES
+source "configs/song/abies/Kconfig"
+endif
+if ARCH_BOARD_BANKS
+source "configs/song/banks/Kconfig"
+endif
 if ARCH_BOARD_U1
 source "configs/song/u1/Kconfig"
 endif
