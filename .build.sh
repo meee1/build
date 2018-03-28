@@ -26,7 +26,7 @@ ROOTDIR=${ROOTDIR}/nuttx
 PROJECTS=(\
 		"abies" \
 		"banks" \
-		"unicorn")
+		"u1")
 
 CONFIGS=(\
 		"
@@ -38,9 +38,9 @@ CONFIGS=(\
 		banks/sensor
 		" \
 		"
-		unicorn/ap
-		unicorn/cp
-		unicorn/sp
+		u1/ap
+		u1/cp
+		u1/sp
 		" \
 		)
 
@@ -120,16 +120,15 @@ function build_board()
 		exit $?
 	fi
 
-	if echo ${commands[@]} | grep -q -w "distclean"; then
-		echo -e "distclean"
-	else
-		echo -e "not distclean"
-		make -C ${ROOTDIR} O=${product_out} savedefconfig
+	if [[ "${commands[@]}" =~ "distclean" ]]; then
+		return;
+	fi
 
-		if [ $? -ne 0 ]; then
-			echo "Error: ############# savedefconfig ${1} fail ##############"
-			exit $?
-		fi
+	make -C ${ROOTDIR} O=${product_out} savedefconfig
+
+	if [ $? -ne 0 ]; then
+		echo "Error: ############# savedefconfig ${1} fail ##############"
+		exit $?
 	fi
 
 	if [ -f ${product_out}/defconfig ]; then
