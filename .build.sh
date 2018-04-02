@@ -26,7 +26,8 @@ ROOTDIR=${ROOTDIR}/nuttx
 PROJECTS=(\
 		"abies" \
 		"banks" \
-		"u1")
+		"u1" \
+		"u2")
 
 CONFIGS=(\
 		"
@@ -41,6 +42,9 @@ CONFIGS=(\
 		u1/ap
 		u1/cp
 		u1/sp
+		" \
+		"
+		u2/ap
 		" \
 		)
 
