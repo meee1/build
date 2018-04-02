@@ -27,6 +27,11 @@ config ARCH_BOARD_U1
 	---help---
 		Pinecone U1 MCU.
 
+config ARCH_BOARD_U2
+	bool "Pinecone U2"
+	---help---
+		Pinecone U2 MCU.
+
 endchoice
 
 if ARCH_BOARD_ABIES
@@ -37,4 +42,7 @@ source "configs/song/banks/Kconfig"
 endif
 if ARCH_BOARD_U1
 source "configs/song/u1/Kconfig"
+endif
+if ARCH_BOARD_U2
+source "configs/song/u2/Kconfig"
 endif
