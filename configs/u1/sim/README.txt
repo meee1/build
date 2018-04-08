@@ -1,3 +1,6 @@
+CAUTION: You MUST run nuttx with ROOT privileges.
+
+How to setup the networking for Ubuntu?
 Assume your NIC as below and 10.235.242.200 is free:
   eth0  Link encap:Ethernet  HWaddr f0:4d:a2:dd:ab:4c
         inet addr:10.235.242.41  Bcast:10.235.242.255  Mask:255.255.255.0
