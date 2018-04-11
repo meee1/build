@@ -9,4 +9,7 @@ choice
 config U2_AP
 	bool "U2 AP"
 
+config U2_AUDIO
+	bool "U2 Audio"
+
 endchoice

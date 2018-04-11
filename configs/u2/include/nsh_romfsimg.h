@@ -1,8 +1,8 @@
 /****************************************************************************
- * configs/u2/src/init.d/rcS
+ * configs/u2/include/nsh_romfsimg.h
  *
  *   Copyright (C) 2018 Pinecone Inc. All rights reserved.
- *   Author: Pinecone <Pinecone@pinecone.net>
+ *   Author: Pinecone <pinecone@pinecone.net>
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
@@ -32,14 +32,9 @@
  * POSSIBILITY OF SUCH DAMAGE.
  *
  ****************************************************************************/
-#include <nuttx/config.h>
 
-#include "rcS.common"
-
-#ifdef CONFIG_U2_AP
-#include "rcS.ap"
-#elif CONFIG_U2_AUDIO
-#include "rcS.audio"
-#else
-#error "unknow u2 config"
+#ifndef __CONFIGS_U1_INCLUDE_NSH_ROMFSIMG_H
+#define __CONFIGS_U1_INCLUDE_NSH_ROMFSIMG_H
+extern const unsigned char romfs_img[];
+extern const unsigned int romfs_img_len;
 #endif

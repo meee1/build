@@ -1,5 +1,5 @@
 /****************************************************************************
- * configs/u2/src/init.d/rcS
+ * configs/u2/src/init.d/rcS.audio
  *
  *   Copyright (C) 2018 Pinecone Inc. All rights reserved.
  *   Author: Pinecone <Pinecone@pinecone.net>
@@ -32,14 +32,3 @@
  * POSSIBILITY OF SUCH DAMAGE.
  *
  ****************************************************************************/
-#include <nuttx/config.h>
-
-#include "rcS.common"
-
-#ifdef CONFIG_U2_AP
-#include "rcS.ap"
-#elif CONFIG_U2_AUDIO
-#include "rcS.audio"
-#else
-#error "unknow u2 config"
-#endif
