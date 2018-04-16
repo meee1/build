@@ -103,7 +103,7 @@ SECTIONS
 
 	_eheap = ORIGIN(shram0) + LENGTH(shram0);
 
-	_etcm = LOADADDR(.data) + LENGTH(.data);
+	_etcm = LOADADDR(.data) + SIZEOF(.data);
 
 	/* Stabs debugging sections. */
 	.stab 0 : { *(.stab) }
