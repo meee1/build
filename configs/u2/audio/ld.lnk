@@ -36,14 +36,9 @@
 #include <nuttx/config.h>
 
 classes:
-	code	[C:00000000, C:00001fff] internal ;[0x80000000, 0x80003fff] 16KB
-	data	[D:00000000, D:00007fff] internal ;[0x82000000, 0x8200ffff] 64KB
+	data	[D:00000000, D:00007fff] internal ;[0x80000000, 0x8000ffff] 64KB
+	code	[C:00000000, C:00001fff] internal ;[0x80200000, 0x80203fff] 16KB
 	shram1	[C:30080000, C:300bffff] external ;[0x60100000, 0x6017ffff] 512KB
-
-code:
-	__stext symbol
-	inttbl
-	__etext symbol
 
 data:
 	__eronly symbol
@@ -52,6 +47,11 @@ data:
 	__sbss symbol
 	__ebss symbol
 	__eheap at hi symbol
+
+code:
+	__stext symbol
+	inttbl
+	__etext symbol
 
 shram1:
 	__stext2 symbol
@@ -70,7 +70,6 @@ shram1:
 	__sdata2 symbol
 	.data
 	__edata2 symbol
-	resource_table
 	__sbss2 symbol
 	.bss
 	__ebss2 symbol

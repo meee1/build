@@ -101,9 +101,14 @@ SECTIONS
 		_ebss = ABSOLUTE(.);
 	} > shram0
 
-	_eheap = ORIGIN(shram0) + LENGTH(shram0);
+	_eheap = ORIGIN(shram0) + LENGTH(shram0) - 4096;
 
-	_etcm = LOADADDR(.data) + SIZEOF(.data);
+	_srsctbl_adsp = LOADADDR(.resource_table.adsp);
+	.resource_table.adsp (_eheap) : {
+		*(.resource_table.adsp)
+	} > shram0 AT > tcm
+
+	_etcm = _srsctbl_adsp + SIZEOF(.resource_table.adsp);
 
 	/* Stabs debugging sections. */
 	.stab 0 : { *(.stab) }
