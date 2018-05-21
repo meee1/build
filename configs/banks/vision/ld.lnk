@@ -33,17 +33,8 @@
 ;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 classes:
-	code	[C:00000000, C:0001ffff] internal ;[0xfda00000, 0xfda1ffff] 128KB
 	data	[D:00000000, D:0007ffff] internal ;[0xfd800000, 0xfd87ffff] 512KB
-
-code:
-	__stext symbol
-	inttbl
-	.text
-	_call_saved_restore_no_frame
-	_call_saved_restore_w_frame_retreg_temp
-	_call_saved_store
-	__etext symbol
+	code	[C:00000000, C:0001ffff] internal ;[0xfda00000, 0xfda1ffff] 128KB
 
 data:
 	const_data
@@ -55,3 +46,12 @@ data:
 	.bss
 	__ebss symbol
 	__eheap at hi symbol
+
+code:
+	__stext symbol
+	inttbl
+	.text
+	_call_saved_restore_no_frame
+	_call_saved_restore_w_frame_retreg_temp
+	_call_saved_store
+	__etext symbol
