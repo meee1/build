@@ -33,6 +33,14 @@
  *
  ****************************************************************************/
 
+#ifdef CONFIG_FS_SMARTFS
+mksmartfs /dev/smart0
+mount -t smartfs /dev/smart0 /data
+
+mksmartfs /dev/smart1
+mount -t smartfs /dev/smart1 /persist
+#endif
+
 #ifdef CONFIG_RPMSG_USRSOCK
 usrsock
 #endif
