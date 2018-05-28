@@ -36,3 +36,7 @@
 #ifdef CONFIG_RPMSG_USRSOCK
 usrsock
 #endif
+
+#ifdef CONFIG_SERVICES_ATCMD
+atcmd
+#endif
