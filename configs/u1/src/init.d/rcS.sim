@@ -34,6 +34,6 @@
  ****************************************************************************/
 
 #ifdef CONFIG_FS_HOSTFS
-mount -t hostfs -o fs=. data
-mount -t hostfs -o fs=. persist
+mount -t hostfs -o fs=. /persist
+mount -t hostfs -o fs=. /data
 #endif

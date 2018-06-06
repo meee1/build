@@ -32,3 +32,8 @@
  * POSSIBILITY OF SUCH DAMAGE.
  *
  ****************************************************************************/
+
+#ifdef CONFIG_FS_HOSTFS_RPMSG
+mount -t hostfs -o fs=/persist,timeout=3000 /persist
+mount -t hostfs -o fs=/data,timeout=3000 /data
+#endif

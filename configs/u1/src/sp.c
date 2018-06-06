@@ -39,9 +39,25 @@
 
 #include <nuttx/config.h>
 
+#include <nuttx/arch.h>
+#include <nuttx/mtd/mtd.h>
+
 #include <arch/board/board.h>
 
 #ifdef CONFIG_U1_SP
+
+#ifdef CONFIG_MTD_GD25
+static void board_flash_init(void)
+{
+  FAR struct mtd_dev_s *mtd;
+
+  mtd = gd25_initialize(g_spi[1]);
+#ifdef CONFIG_MTD_PARTITION_NAMES
+  mtd_setpartitionname(mtd, "data");
+#endif
+  blk_initialize_by_name("data", mtd);
+}
+#endif
 
 /****************************************************************************
  * Public Functions
@@ -53,6 +69,9 @@ void board_earlyinitialize(void)
 
 void board_lateinitialize(void)
 {
+#ifdef CONFIG_MTD_GD25
+  board_flash_init();
+#endif
 }
 
 #endif

@@ -33,10 +33,15 @@
  *
  ****************************************************************************/
 
-#ifdef CONFIG_RPMSG_USRSOCK
-usrsock
+#ifdef CONFIG_FS_LITTLEFS
+mount -t littlefs -o autoformat /dev/mtdpersist /persist
+mount -t littlefs -o autoformat /dev/mtddata /data
 #endif
 
 #ifdef CONFIG_SERVICES_ATCMD
 atcmd
+#endif
+
+#ifdef CONFIG_RPMSG_USRSOCK
+usrsock
 #endif
