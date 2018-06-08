@@ -34,7 +34,7 @@
 ############################################################################
 
 -include $(TOPDIR)/Make.defs
-CSRCS += sim.c
+CSRCS += ap.c cp.c fvp.c sim.c sp.c
 RCSRCS := rcS
 VPATH += :init.d
 DEPPATH += --dep-path init.d

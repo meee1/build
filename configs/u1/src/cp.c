@@ -1,7 +1,7 @@
 /****************************************************************************
- * configs/u1/include/board.h
+ * configs/u1/src/cp.c
  *
- *   Copyright (C) 2017 Pinecone Inc. All rights reserved.
+ *   Copyright (C) 2018 Pinecone Inc. All rights reserved.
  *   Author: Xiang Xiao <xiaoxiang@pinecone.net>
  *
  * Redistribution and use in source and binary forms, with or without
@@ -33,45 +33,26 @@
  *
  ****************************************************************************/
 
-#ifndef __CONFIGS_U1_INCLUDE_BOARD_H
-#define __CONFIGS_U1_INCLUDE_BOARD_H
-
 /****************************************************************************
  * Included Files
  ****************************************************************************/
 
-/****************************************************************************
- * Pre-processor Definitions
- ****************************************************************************/
+#include <nuttx/config.h>
 
-/****************************************************************************
- * Public Types
- ****************************************************************************/
+#include <arch/board/board.h>
 
-/****************************************************************************
- * Public Data
- ****************************************************************************/
-
-#ifndef __ASSEMBLY__
-#ifdef __cplusplus
-#define EXTERN extern "C"
-extern "C"
-{
-#else
-#define EXTERN extern
-#endif
+#ifdef CONFIG_U1_CP
 
 /****************************************************************************
  * Public Functions
  ****************************************************************************/
 
-void board_earlyinitialize(void);
-void board_lateinitialize(void);
-
-#undef EXTERN
-#ifdef __cplusplus
+void board_earlyinitialize(void)
+{
 }
-#endif
-#endif
 
-#endif /* __CONFIGS_U1_INCLUDE_BOARD_H */
+void board_lateinitialize(void)
+{
+}
+
+#endif
