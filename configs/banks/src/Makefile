@@ -34,7 +34,7 @@
 ############################################################################
 
 -include $(TOPDIR)/Make.defs
-CSRCS  := audio.c vision.c
+CSRCS  := audio.c rpm.c sensor.c vision.c
 RCSRCS := rcS
 VPATH += :init.d
 DEPPATH += --dep-path init.d
