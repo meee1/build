@@ -38,6 +38,9 @@
  ****************************************************************************/
 
 #include <nuttx/config.h>
+#ifdef CONFIG_PSEUDOTERM
+#include <nuttx/serial/pty.h>
+#endif
 
 #include <arch/board/board.h>
 
@@ -53,6 +56,9 @@ void board_earlyinitialize(void)
 
 void board_lateinitialize(void)
 {
+#ifdef CONFIG_PSEUDOTERM
+  pty_register(0);
+#endif
 }
 
 void board_finalinitialize(void)
