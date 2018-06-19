@@ -32,18 +32,20 @@
  * POSSIBILITY OF SUCH DAMAGE.
  *
  ****************************************************************************/
+set +e
+
 #include <nuttx/config.h>
 
 #include "rcS.common"
 
 #ifdef CONFIG_BANKS_AUDIO
-#include "rcS.audio"
+#  include "rcS.audio"
 #elif CONFIG_BANKS_SENSOR
-#include "rcS.sensor"
+#  include "rcS.sensor"
 #elif CONFIG_BANKS_RPM
-#include "rcS.rpm"
+#  include "rcS.rpm"
 #elif CONFIG_BANKS_VISION
-#include "rcS.vision"
+#  include "rcS.vision"
 #else
-#error "unknow banks config"
+#  error "unknow banks config"
 #endif

@@ -32,12 +32,14 @@
  * POSSIBILITY OF SUCH DAMAGE.
  *
  ****************************************************************************/
+set +e
+
 #include <nuttx/config.h>
 
 #include "rcS.common"
 
 #ifdef CONFIG_ABIES_AUDIO
-#include "rcS.audio"
+#  include "rcS.audio"
 #else
-#error "unknow abies config"
+#  error "unknow abies config"
 #endif

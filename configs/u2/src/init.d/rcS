@@ -32,14 +32,16 @@
  * POSSIBILITY OF SUCH DAMAGE.
  *
  ****************************************************************************/
+set +e
+
 #include <nuttx/config.h>
 
 #include "rcS.common"
 
 #ifdef CONFIG_U2_AP
-#include "rcS.ap"
+#  include "rcS.ap"
 #elif CONFIG_U2_AUDIO
-#include "rcS.audio"
+#  include "rcS.audio"
 #else
-#error "unknow u2 config"
+#  error "unknow u2 config"
 #endif
