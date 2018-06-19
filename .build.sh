@@ -37,6 +37,7 @@ CONFIGS=(\
 		banks/audio
 		banks/rpm
 		banks/sensor
+		banks/vision
 		" \
 		"
 		u1/ap
