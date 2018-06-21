@@ -37,5 +37,9 @@
 CSRCS += ap.c cp.c fvp.c sim.c sp.c
 RCSRCS := rcS
 VPATH += :init.d
+ifeq ($(CONFIG_NBIOT_MODEM),y)
+RCRAWS += NVM
+RCRAWS += AMT
+endif
 DEPPATH += --dep-path init.d
 include $(TOPDIR)/configs/Board.mk
