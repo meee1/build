@@ -168,6 +168,10 @@ SECTIONS
 
 	_eflash = LOADADDR(.cpram1.data) + SIZEOF(.cpram1.data);
 
+	.cpram1.nozero(NOLOAD) : {
+		*(.cpram1.nozero)
+	} > cpram1
+
 	.cpram1.bss(NOLOAD) : {
 		*(.cpram1.bss)
 	} > cpram1
