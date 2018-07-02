@@ -35,7 +35,7 @@
 
 #ifdef CONFIG_FS_LITTLEFS
 mount -t littlefs -o autoformat /dev/mtdpersist /persist
-mount -t littlefs -o autoformat /dev/mtddata /data
+mount -t littlefs -o autoformat /dev/mtdpersist /data
 #endif
 
 #ifdef CONFIG_SERVICES_ATCMD
