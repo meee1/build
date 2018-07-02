@@ -36,6 +36,6 @@
 -include $(TOPDIR)/Make.defs
 CSRCS  := audio.c rpm.c sensor.c vision.c
 RCSRCS := rcS
-VPATH += :init.d
-DEPPATH += --dep-path init.d
+VPATH += :etc/init.d
+DEPPATH += --dep-path etc/init.d
 include $(TOPDIR)/configs/Board.mk

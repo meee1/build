@@ -34,12 +34,15 @@
 ############################################################################
 
 -include $(TOPDIR)/Make.defs
+
 CSRCS += ap.c cp.c fvp.c sim.c sp.c
 RCSRCS := rcS
-VPATH += :init.d
 ifeq ($(CONFIG_NBIOT_MODEM),y)
-RCRAWS += NVM
-RCRAWS += AMT
+RCRAWS += etc/NVM
+RCRAWS += etc/AMT
 endif
-DEPPATH += --dep-path init.d
+
+VPATH += :etc/init.d
+DEPPATH += --dep-path etc/init.d
+
 include $(TOPDIR)/configs/Board.mk
