@@ -55,4 +55,8 @@ void board_lateinitialize(void)
 {
 }
 
+void board_finalinitialize(void)
+{
+}
+
 #endif

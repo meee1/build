@@ -67,6 +67,7 @@ extern "C"
 
 void board_earlyinitialize(void);
 void board_lateinitialize(void);
+void board_finalinitialize(void);
 
 #undef EXTERN
 #ifdef __cplusplus
