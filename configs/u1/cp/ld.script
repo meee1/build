@@ -127,10 +127,7 @@ SECTIONS
 		_ebss = ABSOLUTE(.);
 	} > sram
 
-	_eheap = _slog;
-	_slog = _elog - _logsize;
-	_elog = ORIGIN(sram) + LENGTH(sram);
-	_logsize = 4096;
+	_eheap = ORIGIN(sram) + LENGTH(sram);
 
 	.cpram0.nozero(NOLOAD) : {
 		*(.cpram0.nozero)
@@ -175,6 +172,10 @@ SECTIONS
 	.cpram1.bss(NOLOAD) : {
 		*(.cpram1.bss)
 	} > cpram1
+
+	_slog = _elog - _logsize;
+	_elog = ORIGIN(cpram1) + LENGTH(cpram1);
+	_logsize = 4096;
 
 	/* Stabs debugging sections. */
 	.stab 0 : { *(.stab) }
