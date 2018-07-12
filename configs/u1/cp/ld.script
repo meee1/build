@@ -173,6 +173,9 @@ SECTIONS
 		*(.cpram1.bss)
 	} > cpram1
 
+	_sheap2 = ABSOLUTE(ALIGN(8));
+	_eheap2 = _slog;
+
 	_slog = _elog - _logsize;
 	_elog = ORIGIN(cpram1) + LENGTH(cpram1);
 	_logsize = 4096;
