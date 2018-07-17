@@ -1,0 +1,18 @@
+This is about how to adjust the configs for Palladium:
+
+1. configs/u1/ap/defconfig
+   add: CONFIG_SYSLOG_RPMSG_WORK_DELAY=0
+
+2. configs/u1/cp/defconfig
+   add: CONFIG_SYSLOG_RPMSG_WORK_DELAY=0
+
+3. configs/u1/sp/defconfig
+   delete: CONFIG_MTD_GD25=y
+
+4. configs/u1/src/etc/init.d/rcS.ap
+   delete: mount -t hostfs -o fs=/persist,timeout=3000 /persist
+   delete: mount -t hostfs -o fs=/data,timeout=3000 /data
+
+5. configs/u1/src/etc/init.d/rcS.cp
+   delete: mount -t hostfs -o fs=/persist,timeout=3000 /persist
+   delete: mount -t hostfs -o fs=/data,timeout=3000 /data
