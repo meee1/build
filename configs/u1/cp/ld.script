@@ -39,6 +39,7 @@ MEMORY
 	sram (rwx)  : ORIGIN = 0x01000000, LENGTH = 192K
 	cpram0 (rw) : ORIGIN = 0x60000000, LENGTH = 336K
 	cpram1 (rw) : ORIGIN = 0x60054000, LENGTH = 128K
+	shram1 (rw) : ORIGIN = 0xb0014000, LENGTH = 8K
 }
 
 OUTPUT_ARCH(arm)
@@ -179,6 +180,10 @@ SECTIONS
 	_slog = _elog - _logsize;
 	_elog = ORIGIN(cpram1) + LENGTH(cpram1);
 	_logsize = 4096;
+
+	.shram1.dma (NOLOAD) : {
+		*(.dma)
+	} > shram1
 
 	/* Stabs debugging sections. */
 	.stab 0 : { *(.stab) }
