@@ -110,6 +110,9 @@ SECTIONS
 
 	_etcm = _srsctbl_adsp + SIZEOF(.resource_table.adsp);
 
+	_sheap2 = _etcm;
+	_eheap2 = ORIGIN(tcm) + LENGTH(tcm);
+
 	/* Stabs debugging sections. */
 	.stab 0 : { *(.stab) }
 	.stabstr 0 : { *(.stabstr) }
