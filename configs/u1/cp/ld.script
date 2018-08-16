@@ -144,22 +144,16 @@ SECTIONS
 	}
 	_cpram0_ebss = _cpram0_sbss + MAX(SIZEOF(.cpram0.nbiot.bss), SIZEOF(.cpram0.gps.bss));
 
-	.cpram1.data : {
+	/* Note: .cpram1.rsvd must be the first section of cpram1 */
+	.cpram1.rsvd(NOLOAD) : {
 		_cpram1_srsvd = ABSOLUTE(.);
-		/*
-		 * struct reserved_data {
-		 *  uint32_t magic;
-		 *  uint32_t size;
-		 *  uint32_t checksum;
-		 *  uint8_t  data[0];
-		 * }
-		 */
-		LONG(0x1234abcd)
-		LONG(_cpram1_ersvd - _cpram1_srsvd - 12)
-		LONG(0)
+		/* Reserve space for struct rsvdmem_head_s */
+		. += 12;
 		*(.cpram1.rsvd)
 		_cpram1_ersvd = ABSOLUTE(.);
+	} > cpram1
 
+	.cpram1.data : {
 		*(.cpram1.const)
 		*(.cpram1.data)
 	} > cpram1 AT > flash
