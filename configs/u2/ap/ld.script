@@ -83,6 +83,14 @@ SECTIONS
 	} > tcm
 	__exidx_end = ABSOLUTE(.);
 
+	.copy.table : {
+		_scopytable = ABSOLUTE(.);
+		LONG(LOADADDR(.resource_table.adsp))
+		LONG(ADDR(.resource_table.adsp))
+		LONG(ADDR(.resource_table.adsp) + SIZEOF(.resource_table.adsp))
+		_ecopytable = ABSOLUTE(.);
+	} > flash
+
 	_eronly = LOADADDR(.data);
 	.data : {
 		_sdata = ABSOLUTE(.);
@@ -103,12 +111,11 @@ SECTIONS
 
 	_eheap = ORIGIN(shram0) + LENGTH(shram0) - 4096;
 
-	_srsctbl_adsp = LOADADDR(.resource_table.adsp);
 	.resource_table.adsp (_eheap) : {
 		*(.resource_table.adsp)
 	} > shram0 AT > tcm
 
-	_etcm = _srsctbl_adsp + SIZEOF(.resource_table.adsp);
+	_etcm = LOADADDR(.resource_table.adsp) + SIZEOF(.resource_table.adsp);
 
 	_sheap2 = _etcm;
 	_eheap2 = ORIGIN(tcm) + LENGTH(tcm);

@@ -85,6 +85,17 @@ SECTIONS
 	} > flash
 	__exidx_end = ABSOLUTE(.);
 
+	.copy.table : {
+		_scopytable = ABSOLUTE(.);
+		LONG(LOADADDR(.resource_table.ap))
+		LONG(ADDR(.resource_table.ap))
+		LONG(ADDR(.resource_table.ap) + SIZEOF(.resource_table.ap))
+		LONG(LOADADDR(.resource_table.cp))
+		LONG(ADDR(.resource_table.cp))
+		LONG(ADDR(.resource_table.cp) + SIZEOF(.resource_table.cp))
+		_ecopytable = ABSOLUTE(.);
+	} > flash
+
 	_framfuncs = LOADADDR(.ramfunc);
 	.ramfunc : {
 		_sramfuncs = ABSOLUTE(.);
@@ -112,17 +123,15 @@ SECTIONS
 
 	_eheap = ORIGIN(sram) + LENGTH(sram);
 
-	_srsctbl_ap = LOADADDR(.resource_table.ap);
 	.resource_table.ap : {
 		*(.resource_table.ap)
 	} > shram0 AT > flash
 
-	_srsctbl_cp = LOADADDR(.resource_table.cp);
 	.resource_table.cp : {
 		*(.resource_table.cp)
 	} > shram1 AT > flash
 
-	_eflash = _srsctbl_cp + SIZEOF(.resource_table.cp);
+	_eflash = LOADADDR(.resource_table.cp) + SIZEOF(.resource_table.cp);
 
 	/* Stabs debugging sections. */
 	.stab 0 : { *(.stab) }
