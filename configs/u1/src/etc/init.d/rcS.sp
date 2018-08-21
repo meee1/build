@@ -38,10 +38,6 @@ mount -t littlefs -o autoformat /dev/mtdpersist /persist
 mount -t littlefs -o autoformat /dev/mtdpersist /data
 #endif
 
-#ifdef CONFIG_SERVICES_ATCMD
-atcmd
-#endif
-
 #ifdef CONFIG_RPMSG_USRSOCK
 usrsock
 #endif
