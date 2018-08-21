@@ -89,7 +89,7 @@ SECTIONS
 		LONG(ADDR(.resource_table.adsp))
 		LONG(ADDR(.resource_table.adsp) + SIZEOF(.resource_table.adsp))
 		_ecopytable = ABSOLUTE(.);
-	} > flash
+	} > tcm
 
 	_eronly = LOADADDR(.data);
 	.data : {
