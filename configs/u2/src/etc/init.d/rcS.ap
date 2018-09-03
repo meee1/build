@@ -34,8 +34,8 @@
  ****************************************************************************/
 
 #ifdef CONFIG_FS_LITTLEFS
-mount -t littlefs -o autoformat /dev/mtdpersist /persist
-mount -t littlefs -o autoformat /dev/mtddata /data
+mount -t littlefs -o autoformat /dev/persist /persist
+mount -t littlefs -o autoformat /dev/data /data
 #endif
 
 #ifdef CONFIG_BT_CONTROLLER
