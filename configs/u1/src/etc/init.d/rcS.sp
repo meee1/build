@@ -34,7 +34,7 @@
  ****************************************************************************/
 
 #ifdef CONFIG_FS_LITTLEFS
-mount -t littlefs -o autoformat /dev/mtddata /persist
+mount -t littlefs -o autoformat /dev/data /persist
 ln -s persist data
 #endif
 

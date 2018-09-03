@@ -90,7 +90,7 @@ static void board_flash_init(void)
   usleep(5000);
 
   mtd = gd25_initialize(g_spi[1]);
-  blk_initialize_by_name("data", mtd);
+  ftl_initialize_by_path("/dev/data", mtd);
 }
 #endif
 
