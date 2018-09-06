@@ -50,7 +50,7 @@ CONFIGS=(\
 		" \
 		)
 
-DEFAULT_PROJECTS=${PROJECTS[2]}
+DEFAULT_PROJECT=${PROJECTS[2]}
 
 SYSTEM=`uname -s`
 HOST_FLAG=
@@ -84,7 +84,7 @@ function usage()
 		echo "      ($j) ${project}" && let j++
 	done
 	echo -e "\n    (Configure target project through the -p option:"
-	echo -e "-->	./build.sh -p ${DEFAULT_PROJECTS})"
+	echo -e "-->	./build.sh -p ${DEFAULT_PROJECT})"
 
 	j=1
 	echo -e "\n ${i}. Project Board Configs:" && let i++
@@ -92,33 +92,33 @@ function usage()
 		echo "      ($j) ${config}" && let j++
 	done
 	echo -e "\n    (Support compile one or more of the configurations through:"
-	echo -e "-->	./build.sh `get_config_list  ${DEFAULT_PROJECTS}`)"
+	echo -e "-->	./build.sh `get_config_list ${DEFAULT_PROJECT}`)"
 
 	echo -e "\n ${i}. Default Output Directory:" && let i++
 	echo -e "       ${OUTDIR}/\${CONFIGS}"
 	echo -e "\n    (Configure this path dynamically through the -o option:"
-	echo "-->       ./build.sh -o \${OUTDIR}"
-	echo "-->       ./build.sh -o \${OUTDIR} `get_config_list  ${DEFAULT_PROJECTS}`)"
+	echo "-->       ./build.sh -o ${OUTDIR}"
+	echo "-->       ./build.sh -o ${OUTDIR} `get_config_list ${DEFAULT_PROJECT}`)"
 
 	j=1
 	echo -e "\n ${i}. Compile Products:" && let i++
 		for config in ${CONFIGS[*]}; do
-			echo "      ($j) \${OUTDIR}/${config}.bin" && let j++
+			echo "      ($j) ${OUTDIR}/${config}.bin" && let j++
 		done
 	echo -e "\n----------------------------------------------------"
 }
 
 function build_board()
 {
-	local product=${1}.bin
-	local product_out=${OUTDIR}/${1}/nuttx
+	local product=${1#song/}.bin
+	local product_out=${OUTDIR}/${1#song/}/nuttx
 
 	echo -e "\nCompile Command line:\n"
 	echo -e "	${ROOTDIR}/tools/configure.sh ${HOST_FLAG} -o ${product_out} ${1}"
 	echo -e "	make -C ${ROOTDIR} O=${product_out} ${commands[*]}"
 	echo -e "	make -C ${ROOTDIR} O=${product_out} savedefconfig\n"
 
-	${ROOTDIR}/tools/configure.sh ${HOST_FLAG} -o ${product_out} song/${1} && \
+	${ROOTDIR}/tools/configure.sh ${HOST_FLAG} -o ${product_out} ${1} && \
 	make -C ${ROOTDIR} O=${product_out} ${commands[*]}
 
 	if [ $? -ne 0 ]; then
@@ -138,7 +138,7 @@ function build_board()
 	fi
 
 	if [ -f ${product_out}/defconfig ]; then
-		cp ${product_out}/defconfig ${ROOTDIR}/configs/song/${1}
+		cp ${product_out}/defconfig ${ROOTDIR}/configs/${1}
 	fi
 
 	if [ -f ${product_out}/nuttx.bin ]; then
@@ -158,7 +158,7 @@ while [ ! -z "$1" ]; do
 
 			if [ "${config_list[*]}" ]; then
 				for config in ${config_list[*]}; do
-					configs[${#configs[@]}]=${config}
+					configs[${#configs[@]}]=song/${config}
 				done
 			else
 				echo "Error: Unable to find the board or configurations from $1"
@@ -173,6 +173,9 @@ while [ ! -z "$1" ]; do
 
 			find_config=
 			if [ -d "${ROOTDIR}/configs/song/$1" ]; then
+				configs[${#configs[@]}]=song/$1
+				find_config=true
+			elif [ -d "${ROOTDIR}/configs/$1" ]; then
 				configs[${#configs[@]}]=$1
 				find_config=true
 			fi
@@ -191,8 +194,8 @@ if [ -n "${configs[*]}" ]; then
 	done
 	exit $?
 else
-	configs=`get_config_list ${DEFAULT_PROJECTS}`
+	configs=`get_config_list ${DEFAULT_PROJECT}`
 	for config in ${configs[*]}; do
-		build_board ${config}
+		build_board song/${config}
 	done
 fi
