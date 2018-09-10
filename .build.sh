@@ -115,9 +115,19 @@ function usage()
 	echo -e "\n----------------------------------------------------"
 }
 
+function make_system()
+{
+	if [ ! `command -v ${1}/tools/genromfs > /dev/null` ]; then
+		${1}/tools/genromfs -f $2 -d $3 -V "SYSTEM"
+	else
+		echo "Error: #### Unable to find command 'genromfs', make system image fail ####"
+	fi
+}
+
 function build_board()
 {
 	local product=${1#song/}.bin
+	local apps_out=${OUTDIR}/${1#song/}/apps
 	local product_out=${OUTDIR}/${1#song/}/nuttx
 
 	echo -e "\nCompile Command line:\n"
@@ -150,6 +160,10 @@ function build_board()
 
 	if [ -f ${product_out}/nuttx.bin ]; then
 		cp -f ${product_out}/nuttx.bin ${OUTDIR}/${product}
+	fi
+
+	if [ -d ${apps_out}/exe/system ]; then
+		make_system ${product_out} ${OUTDIR}/${1#song/}/../system.bin ${apps_out}/exe/system
 	fi
 }
 
