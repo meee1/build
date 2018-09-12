@@ -38,7 +38,6 @@ MEMORY
 	sram (rwx) : ORIGIN = 0x00000000, LENGTH = 192K /* 256-60-4 */
 }
 
-OUTPUT_ARCH(arm)
 ENTRY(_stext)
 SECTIONS
 {

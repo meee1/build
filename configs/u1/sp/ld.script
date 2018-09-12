@@ -42,7 +42,6 @@ MEMORY
 	cpshram (rw)  : ORIGIN = 0xb0010000, LENGTH = 16K /* 24-8 */
 }
 
-OUTPUT_ARCH(arm)
 ENTRY(_stext)
 SECTIONS
 {

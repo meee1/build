@@ -42,7 +42,6 @@ MEMORY
 	shram1 (rw) : ORIGIN = 0xb0014000, LENGTH = 8K
 }
 
-OUTPUT_ARCH(arm)
 ENTRY(_stext)
 SECTIONS
 {
