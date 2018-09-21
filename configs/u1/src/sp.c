@@ -41,6 +41,7 @@
 
 #include <nuttx/arch.h>
 #include <nuttx/mtd/mtd.h>
+#include <nuttx/power/consumer.h>
 
 #include <arch/board/board.h>
 
@@ -50,11 +51,27 @@
 static void board_flash_init(void)
 {
   FAR struct mtd_dev_s *mtd;
+  FAR struct regulator *reg;
+
+  reg = regulator_get(NULL, "ldo4");
+  if (!reg)
+    {
+      syslog(LOG_ERR, "failed to get ldo4\n");
+      return;
+    }
+
+  regulator_set_voltage(reg, 3000000, 3000000);
+  if (regulator_enable(reg))
+    {
+      regulator_put(reg);
+      syslog(LOG_ERR, "failed to enable ldo4\n");
+      return;
+    }
+
+  /* wait for the power to be stable */
+  usleep(1000);
 
   mtd = gd25_initialize(g_spi[1]);
-#ifdef CONFIG_MTD_PARTITION_NAMES
-  mtd_setpartitionname(mtd, "data");
-#endif
   blk_initialize_by_name("data", mtd);
 }
 #endif
