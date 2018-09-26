@@ -34,6 +34,6 @@
  ****************************************************************************/
 
 #ifdef CONFIG_FS_HOSTFS_RPMSG
-mount -t hostfs -o fs=/persist,timeout=3000 /persist
-mount -t hostfs -o fs=/data,timeout=3000 /data
+mount -t hostfs -o fs=/persist /persist
+mount -t hostfs -o fs=/data /data
 #endif
