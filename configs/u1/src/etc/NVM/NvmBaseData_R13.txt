@@ -12,7 +12,7 @@
 0x00	Two HARQ Processes Support Flg
 0x00	Power Class 14dBm Support Flg
 0x00	Paging on non-anchor multi carriers Support Flg
-0x00	Supported Rohc Profiles
+0x01	Supported Rohc Profiles
 0x00	
 0x00	
 0x00	
@@ -20,11 +20,11 @@
 0x00	
 0x00	
 0x00	Max ROHC Context Sessions
-0x00	Multi Tone Support Flg
-0x00	Multi Carrier Support Flg
+0x01	Multi Tone Support Flg
+0x01	Multi Carrier Support Flg
 0x02	Support Band Num
 0x00	Support Band Info
-0x01	
+0x05	
 0x01	
 0x01	
 0x00	
@@ -32,7 +32,7 @@
 0x00	
 0x00	
 0x00	Support Band Info
-0x02	
+0x08	
 0x01	
 0x01	
 0x00	
@@ -141,8 +141,8 @@
 0x01	S1 UData Support Flg
 0x01	ERw Opdn Support Flg
 0x00	Ext Periodic Timers Support Flg
-0x00    EDRX Support Flag
-0x00    PSM Support Flag
+0x01    EDRX Support Flag
+0x01    PSM Support Flag
 0x01    UE's preference for CIoT EPS optimizations
 0x00	Additional update type value
 0x00    Cp Back Off Support Flg
@@ -561,9 +561,9 @@
 0x00
 0x00	Dcn Id
 0x00
-0x00    Psm Enable Flg	
-0x00    Request Period Tau Value
-0x00    Request ActTime Value
+0x01    Psm Enable Flg	
+0x01    Request Period Tau Value
+0x06    Request ActTime Value
 0x00    Edrx Enable Flg
 0x00    Request Edrx Value	
 0x00	Number of EPLMN   //   Nvm DataRW Start Address
