@@ -139,7 +139,7 @@
 0x00	Nf Capability Support Flg
 0x01	Up CIoT Support Flg
 0x01	S1 UData Support Flg
-0x01	ERw Opdn Support Flg
+0x00	ERw Opdn Support Flg
 0x00	Ext Periodic Timers Support Flg
 0x01    EDRX Support Flag
 0x01    PSM Support Flag
