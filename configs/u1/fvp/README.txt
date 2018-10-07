@@ -1,3 +1,9 @@
+0.How to setup the license server?
+  a.Add environment variable ARMLMD_LICENSE_FILE=8224@127.0.0.1
+  b.Change MAC address to 782bcba92507 like below:
+    https://www.wikihow.com/Change-a-Computer%27s-Mac-Address-in-Windows
+  c.Double click flexnet/run.bat
+
 1.How to setup the simulator?
   a.Download and install DS-5 from:
     https://developer.arm.com/products/software-development-tools/ds-5-development-studio/downloads
@@ -8,12 +14,13 @@
   f.Press Debug button at the bottom
 
 2.How to setup the console terminal?
-  a.Copy telnet.exe from cygwin's bin to C:\Windows\System32
-  b.Add cygwin's bin folder into PATH environment variable
+  a.Open Control Panel from the Windows Start menu
+  b.Select Programs
+  c.Under Programs and Features, click Turn Windows features on or off
+  d.From the list that appears, select the Telnet Client checkbox to enable telnet
+  e.Click OK to close the dialog
   Note:
-  a.Don't use telnet.exe come from Windows installation
-  b.Don't input too fast which may make UART overrun
-  c.Ubuntu don't need any special setup
+  a.Ubuntu don't need any special setup
 
 3.How to setup semihosting base directory?
   a.Open Run->Debug Configurations
@@ -37,3 +44,4 @@
   a.Rename ARMfmuser to ARM0 and fmuser to $(whoami) for Unbuntu
   b.fvp/network/windows is the tools required for Windows
   c.fvp/network/linux is the tools required for Redhat
+  d.Don't use WIFI which can't work well with bridge
