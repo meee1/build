@@ -36,10 +36,8 @@
     -C fvp_mps2.smsc_91c111.enabled=1
   c.For Windows, please follow these links:
     https://developer.arm.com/products/system-design/fast-models/docs/dui0834/d/introduction/network-set-up/taptun-networking/setting-up-a-network-connection-for-microsoft-windows
-    https://developer.arm.com/products/system-design/fast-models/docs/dui0834/d/introduction/network-set-up/taptun-networking/configuring-the-networking-environment-for-microsoft-windows
   d.For Unbuntu, please follow these links:
     https://developer.arm.com/products/system-design/fast-models/docs/dui0834/d/introduction/network-set-up/taptun-networking/setting-up-a-network-connection-for-ubuntu-linux
-    https://developer.arm.com/products/system-design/fast-models/docs/dui0834/d/introduction/network-set-up/taptun-networking/configuring-the-networking-environment-for-linux
   Note:
   a.Rename ARMfmuser to ARM0 and fmuser to $(whoami) for Unbuntu
   b.fvp/network/windows is the tools required for Windows
