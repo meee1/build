@@ -28,4 +28,10 @@ Second, start nuttx simulator with ROOT privileges:
   56 bytes from 61.149.9.232: icmp_seq=9 time=10 ms
   10 packets transmitted, 10 received, 0% packet loss, time 10100 ms
 
+Last, you can remove the bridge:
+  sudo ip link delete nuttx0
+  sudo dhclient eth0
+
+Note, Don't use WIFI which can't work well with bridge.
+
 That's it.
