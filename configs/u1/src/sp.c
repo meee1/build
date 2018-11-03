@@ -90,7 +90,7 @@ static void board_flash_init(void)
   usleep(5000);
 
   mtd = gd25_initialize(g_spi[1]);
-  ftl_initialize_by_path("/dev/data", mtd);
+  register_mtddriver("/dev/data", mtd, 0, mtd);
 }
 #endif
 
