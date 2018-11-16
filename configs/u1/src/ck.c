@@ -1,8 +1,8 @@
 /****************************************************************************
- * configs/u1/src/init.d/rcS
+ * configs/u1/src/ck.c
  *
  *   Copyright (C) 2018 Pinecone Inc. All rights reserved.
- *   Author: Pinecone <Pinecone@pinecone.net>
+ *   Author: Xiang Xiao <xiaoxiang@pinecone.net>
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
@@ -32,24 +32,31 @@
  * POSSIBILITY OF SUCH DAMAGE.
  *
  ****************************************************************************/
-set +e
+
+/****************************************************************************
+ * Included Files
+ ****************************************************************************/
 
 #include <nuttx/config.h>
 
-#include "rcS.common"
+#include <arch/board/board.h>
 
-#ifdef CONFIG_U1_AP
-#  include "rcS.ap"
-#elif CONFIG_U1_CK
-#  include "rcS.ck"
-#elif CONFIG_U1_CP
-#  include "rcS.cp"
-#elif CONFIG_U1_SP
-#  include "rcS.sp"
-#elif CONFIG_U1_FVP
-#  include "rcS.fvp"
-#elif CONFIG_U1_SIM
-#  include "rcS.sim"
-#else
-#  error "unknow u1 config"
+#ifdef CONFIG_U1_CK
+
+/****************************************************************************
+ * Public Functions
+ ****************************************************************************/
+
+void board_earlyinitialize(void)
+{
+}
+
+void board_lateinitialize(void)
+{
+}
+
+void board_finalinitialize(void)
+{
+}
+
 #endif

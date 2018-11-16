@@ -1,5 +1,5 @@
 /****************************************************************************
- * configs/u1/src/init.d/rcS
+ * configs/u1/src/init.d/rcS.ap
  *
  *   Copyright (C) 2018 Pinecone Inc. All rights reserved.
  *   Author: Pinecone <Pinecone@pinecone.net>
@@ -32,24 +32,20 @@
  * POSSIBILITY OF SUCH DAMAGE.
  *
  ****************************************************************************/
-set +e
 
-#include <nuttx/config.h>
+#ifdef CONFIG_FS_HOSTFS_RPMSG
+mount -t hostfs -o fs=/persist /persist
+mount -t hostfs -o fs=/data /data
+#endif
 
-#include "rcS.common"
+#ifdef CONFIG_SERVICES_ATCMD
+atcmd
+#endif
 
-#ifdef CONFIG_U1_AP
-#  include "rcS.ap"
-#elif CONFIG_U1_CK
-#  include "rcS.ck"
-#elif CONFIG_U1_CP
-#  include "rcS.cp"
-#elif CONFIG_U1_SP
-#  include "rcS.sp"
-#elif CONFIG_U1_FVP
-#  include "rcS.fvp"
-#elif CONFIG_U1_SIM
-#  include "rcS.sim"
-#else
-#  error "unknow u1 config"
+#ifdef CONFIG_RPMSG_USRSOCK
+usrsock sp
+#endif
+
+#if defined(CONFIG_PM) && !defined(CONFIG_NSH_DISABLE_PMCONFIG)
+pmconfig stay idle
 #endif
