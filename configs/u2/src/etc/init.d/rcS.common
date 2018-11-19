@@ -33,9 +33,12 @@
  *
  ****************************************************************************/
 
+#ifndef CONFIG_NSH_DISABLE_UNAME
+uname -a > /dev/syslog
+#endif
+
 #ifdef CONFIG_NSH_PROC_MOUNTPOINT
 mount -t procfs CONFIG_NSH_PROC_MOUNTPOINT
-cat /proc/version > /dev/syslog
 #endif
 
 #ifdef CONFIG_FS_BINFS
