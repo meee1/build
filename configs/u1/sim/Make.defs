@@ -57,6 +57,30 @@ ARCHINCLUDES = -I. -isystem $(TOPDIR)/include -isystem $(TOPDIR)/configs/sim/src
 ARCHINCLUDESXX = $(ARCHINCLUDES) -isystem $(TOPDIR)/include/cxx
 ARCHSCRIPT =
 
+ifeq ($(CONFIG_WINDOWS_CYGWIN),y)
+  # Windows-native toolchains
+  ARCHXXINCLUDES = -I. -isystem "${shell cygpath -w $(TOPDIR)/include}" -isystem "${shell cygpath -w $(TOPDIR)/include/cxx}"
+
+  ifeq ($(CONFIG_UCLIBCXX),y)
+    ARCHXXINCLUDES += -isystem "${shell cygpath -m $(OUTDIR)$(DELIM)include$(DELIM)uClibc++}"
+  endif
+  ifeq ($(CONFIG_LIBCXX),y)
+    ARCHXXINCLUDES += -isystem "${shell cygpath -m $(OUTDIR)$(DELIM)include$(DELIM)libcxx}"
+    ARCHXXINCLUDES += -isystem "${shell cygpath -m $(OUTDIR)$(DELIM)include$(DELIM)machine}"
+  endif
+else
+  # Linux/Cygwin-native toolchain
+  ARCHXXINCLUDES = -I. -isystem $(TOPDIR)/include -isystem $(TOPDIR)/include/cxx
+
+  ifeq ($(CONFIG_UCLIBCXX),y)
+    ARCHXXINCLUDES += -isystem $(OUTDIR)$(DELIM)include$(DELIM)uClibc++
+  endif
+  ifeq ($(CONFIG_LIBCXX),y)
+    ARCHXXINCLUDES += -isystem $(OUTDIR)$(DELIM)include$(DELIM)libcxx
+    ARCHXXINCLUDES += -isystem $(OUTDIR)$(DELIM)include$(DELIM)machine
+  endif
+endif
+
 ifeq ($(CONFIG_SIM_M32),y)
   ARCHCPUFLAGS += -m32
   ARCHCPUFLAGSXX += -m32
@@ -74,8 +98,8 @@ OBJDUMP = $(CROSSDEV)objdump
 
 CFLAGS = $(ARCHWARNINGS) $(ARCHOPTIMIZATION) \
    $(ARCHCPUFLAGS) $(ARCHINCLUDES) $(ARCHDEFINES) $(EXTRADEFINES) -pipe
-CXXFLAGS = $(ARCHWARNINGSXX) $(ARCHOPTIMIZATION) \
-   $(ARCHCPUFLAGSXX) $(ARCHINCLUDESXX) $(ARCHDEFINESXX) $(EXTRADEFINES) -pipe
+CXXFLAGS = $(ARCHWARNINGSXX) $(ARCHOPTIMIZATION) $(ARCHXXINCLUDES) \
+   $(ARCHCPUFLAGSXX) $(ARCHINCLUDESXX) $(ARCHDEFINESXX) $(EXTRADEFINES) -fpermissive -pipe
 CPPFLAGS = $(ARCHINCLUDES) $(ARCHDEFINES) $(EXTRADEFINES)
 AFLAGS = $(CFLAGS) -D__ASSEMBLY__
 
