@@ -47,6 +47,7 @@ CONFIGS=(\
 		"
 		u2/ap
 		u2/audio
+		u2/ri5cy
 		" \
 		)
 

@@ -1,5 +1,5 @@
 /****************************************************************************
- * configs/u2/src/init.d/rcS
+ * configs/u2/src/init.d/rcS.ri5cy
  *
  *   Copyright (C) 2018 Pinecone Inc. All rights reserved.
  *   Author: Pinecone <Pinecone@pinecone.net>
@@ -32,18 +32,12 @@
  * POSSIBILITY OF SUCH DAMAGE.
  *
  ****************************************************************************/
-set +e
 
-#include <nuttx/config.h>
+#ifdef CONFIG_FS_LITTLEFS
+mount -t littlefs -o autoformat /dev/persist /persist
+mount -t littlefs -o autoformat /dev/data /data
+#endif
 
-#include "rcS.common"
-
-#ifdef CONFIG_U2_AP
-#  include "rcS.ap"
-#elif CONFIG_U2_AUDIO
-#  include "rcS.audio"
-#elif CONFIG_U2_RI5CY
-#  include "rcS.ri5cy"
-#else
-#  error "unknow u2 config"
+#ifdef CONFIG_BT_CONTROLLER
+btc
 #endif

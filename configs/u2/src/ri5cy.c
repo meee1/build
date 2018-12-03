@@ -1,8 +1,8 @@
 /****************************************************************************
- * configs/u2/src/init.d/rcS
+ * configs/u2/src/ri5cy.c
  *
  *   Copyright (C) 2018 Pinecone Inc. All rights reserved.
- *   Author: Pinecone <Pinecone@pinecone.net>
+ *   Author: Xiang Xiao <xiaoxiang@pinecone.net>
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
@@ -32,18 +32,37 @@
  * POSSIBILITY OF SUCH DAMAGE.
  *
  ****************************************************************************/
-set +e
+
+/****************************************************************************
+ * Included Files
+ ****************************************************************************/
 
 #include <nuttx/config.h>
+#ifdef CONFIG_PSEUDOTERM
+#include <nuttx/serial/pty.h>
+#endif
 
-#include "rcS.common"
+#include <arch/board/board.h>
 
-#ifdef CONFIG_U2_AP
-#  include "rcS.ap"
-#elif CONFIG_U2_AUDIO
-#  include "rcS.audio"
-#elif CONFIG_U2_RI5CY
-#  include "rcS.ri5cy"
-#else
-#  error "unknow u2 config"
+#ifdef CONFIG_U2_RI5CY
+
+/****************************************************************************
+ * Public Functions
+ ****************************************************************************/
+
+void board_earlyinitialize(void)
+{
+}
+
+void board_lateinitialize(void)
+{
+#ifdef CONFIG_PSEUDOTERM
+  pty_register(0);
+#endif
+}
+
+void board_finalinitialize(void)
+{
+}
+
 #endif
