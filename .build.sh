@@ -27,7 +27,8 @@ PROJECTS=(\
 		"abies" \
 		"banks" \
 		"u1" \
-		"u2")
+		"u2" \
+		"v1" )
 
 CONFIGS=(\
 		"
@@ -48,6 +49,9 @@ CONFIGS=(\
 		u2/ap
 		u2/audio
 		u2/ri5cy
+		" \
+		"
+		v1/vision
 		" \
 		)
 
