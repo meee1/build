@@ -45,3 +45,7 @@ atcmd
 #ifdef CONFIG_RPMSG_USRSOCK
 usrsock sp
 #endif
+
+#if defined(CONFIG_PM) && !defined(CONFIG_NSH_DISABLE_PMCONFIG)
+pmconfig stay idle
+#endif
