@@ -52,6 +52,7 @@ CONFIGS=(\
 		" \
 		"
 		v1/vision
+		v1/isp
 		" \
 		)
 

@@ -1,8 +1,8 @@
 /****************************************************************************
- * configs/v1/src/init.d/rcS
+ * configs/v1/src/isp.c
  *
  *   Copyright (C) 2018 Pinecone Inc. All rights reserved.
- *   Author: Pinecone <Pinecone@pinecone.net>
+ *   Author: Dou Jianglong <doujianglong@pinecone.net>
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
@@ -32,16 +32,31 @@
  * POSSIBILITY OF SUCH DAMAGE.
  *
  ****************************************************************************/
-set +e
+
+/****************************************************************************
+ * Included Files
+ ****************************************************************************/
 
 #include <nuttx/config.h>
 
-#include "rcS.common"
+#include <arch/board/board.h>
 
 #ifdef CONFIG_V1_ISP
-#  include "rcS.isp"
-#elif CONFIG_V1_VISION
-#  include "rcS.vision"
-#else
-#  error "unknow v1 config"
+
+/****************************************************************************
+ * Public Functions
+ ****************************************************************************/
+
+void board_earlyinitialize(void)
+{
+}
+
+void board_lateinitialize(void)
+{
+}
+
+void board_finalinitialize(void)
+{
+}
+
 #endif

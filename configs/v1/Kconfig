@@ -6,6 +6,9 @@
 choice
 	prompt "Select target application"
 
+config V1_ISP
+	bool "V1 ISP"
+
 config V1_VISION
 	bool "V1 Vision"
 

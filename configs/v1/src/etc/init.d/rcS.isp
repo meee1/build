@@ -1,5 +1,5 @@
 /****************************************************************************
- * configs/v1/src/init.d/rcS
+ * configs/v1/src/init.d/rcS.isp
  *
  *   Copyright (C) 2018 Pinecone Inc. All rights reserved.
  *   Author: Pinecone <Pinecone@pinecone.net>
@@ -32,16 +32,3 @@
  * POSSIBILITY OF SUCH DAMAGE.
  *
  ****************************************************************************/
-set +e
-
-#include <nuttx/config.h>
-
-#include "rcS.common"
-
-#ifdef CONFIG_V1_ISP
-#  include "rcS.isp"
-#elif CONFIG_V1_VISION
-#  include "rcS.vision"
-#else
-#  error "unknow v1 config"
-#endif

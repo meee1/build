@@ -1,8 +1,8 @@
 ############################################################################
-# configs/v1/src/Makefile
+# configs/v1/isp/Make.defs
 #
 #   Copyright (C) 2017 Pinecone Inc. All rights reserved.
-#   Author: Bo Zhang <zhangbo_a@pinecone.net>
+#   Author: Wang Yanjiong <wangyanjiong@pinecone.net>
 #
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions
@@ -33,9 +33,8 @@
 #
 ############################################################################
 
--include $(TOPDIR)/Make.defs
-CSRCS  := isp.c vision.c
-RCSRCS := rcS
-VPATH += :etc/init.d
-DEPPATH += --dep-path etc/init.d
-include $(TOPDIR)/configs/Board.mk
+include ${TOPDIR}/.config
+include ${TOPDIR}/tools/Config.mk
+include ${TOPDIR}/arch/risc-v/src/song/Toolchain.defs
+
+LDSCRIPT = $(TOPDIR)/configs/song/v1/isp/ld.script
