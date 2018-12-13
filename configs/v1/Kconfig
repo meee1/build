@@ -9,6 +9,9 @@ choice
 config V1_ISP
 	bool "V1 ISP"
 
+config V1_RPM
+	bool "V1 RPM"
+
 config V1_VISION
 	bool "V1 Vision"
 

@@ -53,6 +53,7 @@ CONFIGS=(\
 		"
 		v1/vision
 		v1/isp
+		v1/rpm
 		" \
 		)
 

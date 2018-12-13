@@ -1,8 +1,8 @@
 /****************************************************************************
- * configs/v1/src/init.d/rcS
+ * configs/v1/rpm/ld.script
  *
- *   Copyright (C) 2018 Pinecone Inc. All rights reserved.
- *   Author: Pinecone <Pinecone@pinecone.net>
+ *   Copyright (C) 2017 Pinecone Inc. All rights reserved.
+ *   Author: Wang Yanjiong <wangyanjiong@pinecone.net>
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
@@ -32,20 +32,69 @@
  * POSSIBILITY OF SUCH DAMAGE.
  *
  ****************************************************************************/
-set +e
 
-#include <nuttx/config.h>
+MEMORY
+{
+	sram (rwx) : ORIGIN = 0x00000000, LENGTH = 256K
+}
 
-#include "rcS.first"
+ENTRY(_stext)
+SECTIONS
+{
+	.text : {
+		_stext = ABSOLUTE(.);
+		KEEP(*(.vectors))
+		*(.text .text.*)
+		*(.fixup)
+		*(.gnu.warning)
+		*(.rodata .rodata.*)
+		*(.gnu.linkonce.t.*)
+		*(.glue_7)
+		*(.glue_7t)
+		*(.got)
+		*(.gcc_except_table)
+		*(.gnu.linkonce.r.*)
+		_etext = ABSOLUTE(.);
+	} > sram
 
-#ifdef CONFIG_V1_ISP
-#  include "rcS.isp"
-#elif CONFIG_V1_RPM
-#  include "rcS.rpm"
-#elif CONFIG_V1_VISION
-#  include "rcS.vision"
-#else
-#  error "unknow v1 config"
-#endif
+	.init_section : {
+		_sinit = ABSOLUTE(.);
+		KEEP(*(.init_array .init_array.*))
+		_einit = ABSOLUTE(.);
+	} > sram
 
-#include "rcS.last"
+	_eronly = LOADADDR(.data);
+
+	.data : {
+		_sdata = ABSOLUTE(.);
+		*(.data .data.* .sdata .sdata.*)
+		*(.gnu.linkonce.d.*)
+		CONSTRUCTORS
+		_edata = ABSOLUTE(.);
+	} > sram
+
+	.bss : {
+		_sbss = ABSOLUTE(.);
+		*(.bss .bss.* .sbss .sbss.*)
+		*(.gnu.linkonce.b.*)
+		*(COM*)
+		. = ALIGN(8);
+		_ebss = ABSOLUTE(.);
+	} > sram
+
+	_eheap = ORIGIN(sram) + LENGTH(sram);
+
+	/* Stabs debugging sections. */
+	.stab 0 : { *(.stab) }
+	.stabstr 0 : { *(.stabstr) }
+	.stab.excl 0 : { *(.stab.excl) }
+	.stab.exclstr 0 : { *(.stab.exclstr) }
+	.stab.index 0 : { *(.stab.index) }
+	.stab.indexstr 0 : { *(.stab.indexstr) }
+	.comment 0 : { *(.comment) }
+	.debug_abbrev 0 : { *(.debug_abbrev) }
+	.debug_info 0 : { *(.debug_info) }
+	.debug_line 0 : { *(.debug_line) }
+	.debug_pubnames 0 : { *(.debug_pubnames) }
+	.debug_aranges 0 : { *(.debug_aranges) }
+}
