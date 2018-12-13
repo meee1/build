@@ -36,7 +36,7 @@ set +e
 
 #include <nuttx/config.h>
 
-#include "rcS.common"
+#include "rcS.first"
 
 #ifdef CONFIG_U1_AP
 #  include "rcS.ap"
@@ -53,3 +53,5 @@ set +e
 #else
 #  error "unknow u1 config"
 #endif
+
+#include "rcS.last"

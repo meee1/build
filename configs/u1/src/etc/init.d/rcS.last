@@ -1,5 +1,5 @@
 /****************************************************************************
- * configs/u2/src/init.d/rcS
+ * configs/u1/src/init.d/rcS.last
  *
  *   Copyright (C) 2018 Pinecone Inc. All rights reserved.
  *   Author: Pinecone <Pinecone@pinecone.net>
@@ -32,20 +32,7 @@
  * POSSIBILITY OF SUCH DAMAGE.
  *
  ****************************************************************************/
-set +e
 
-#include <nuttx/config.h>
-
-#include "rcS.first"
-
-#ifdef CONFIG_U2_AP
-#  include "rcS.ap"
-#elif CONFIG_U2_AUDIO
-#  include "rcS.audio"
-#elif CONFIG_U2_RI5CY
-#  include "rcS.ri5cy"
-#else
-#  error "unknow u2 config"
+#ifndef CONFIG_NSH_DISABLE_UNAME
+uname -a > /dev/syslog
 #endif
-
-#include "rcS.last"

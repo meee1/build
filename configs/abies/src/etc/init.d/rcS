@@ -36,10 +36,12 @@ set +e
 
 #include <nuttx/config.h>
 
-#include "rcS.common"
+#include "rcS.first"
 
 #ifdef CONFIG_ABIES_AUDIO
 #  include "rcS.audio"
 #else
 #  error "unknow abies config"
 #endif
+
+#include "rcS.last"

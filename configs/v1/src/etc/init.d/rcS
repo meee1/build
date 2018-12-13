@@ -36,7 +36,7 @@ set +e
 
 #include <nuttx/config.h>
 
-#include "rcS.common"
+#include "rcS.first"
 
 #ifdef CONFIG_V1_ISP
 #  include "rcS.isp"
@@ -45,3 +45,5 @@ set +e
 #else
 #  error "unknow v1 config"
 #endif
+
+#include "rcS.last"

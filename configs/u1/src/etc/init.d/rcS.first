@@ -1,5 +1,5 @@
 /****************************************************************************
- * configs/abies/src/init.d/rcS.common
+ * configs/u1/src/init.d/rcS.first
  *
  *   Copyright (C) 2018 Pinecone Inc. All rights reserved.
  *   Author: Pinecone <Pinecone@pinecone.net>
@@ -33,10 +33,6 @@
  *
  ****************************************************************************/
 
-#ifndef CONFIG_NSH_DISABLE_UNAME
-uname -a > /dev/syslog
-#endif
-
 #ifdef CONFIG_NSH_PROC_MOUNTPOINT
 mount -t procfs CONFIG_NSH_PROC_MOUNTPOINT
 #endif
@@ -47,10 +43,4 @@ mount -t binfs /bin
 
 #ifdef CONFIG_FS_TMPFS
 mount -t tmpfs /tmp
-#endif
-
-#ifdef CONFIG_FS_HOSTFS_RPMSG
-mount -t hostfs -o fs=/data /data
-mount -t hostfs -o fs=/system /system
-mount -t hostfs -o fs=/vendor /vendor
 #endif
