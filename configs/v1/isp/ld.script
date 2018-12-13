@@ -35,8 +35,8 @@
 
 MEMORY
 {
-	iram (rwx) : ORIGIN = 0x00000000, LENGTH = 64K
-	dram (rw) : ORIGIN = 0x00010000, LENGTH = 64K
+	iram (rwx) : ORIGIN = 0x00000000, LENGTH = 96K
+	dram (rw) : ORIGIN = 0x00018000, LENGTH = 32K
 }
 
 ENTRY(_stext)
