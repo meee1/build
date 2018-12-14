@@ -1,8 +1,8 @@
 /****************************************************************************
- * configs/u2/src/ri5cy.c
+ * configs/u2/src/init.d/rcS.m4
  *
  *   Copyright (C) 2018 Pinecone Inc. All rights reserved.
- *   Author: Xiang Xiao <xiaoxiang@pinecone.net>
+ *   Author: Pinecone <Pinecone@pinecone.net>
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
@@ -33,36 +33,11 @@
  *
  ****************************************************************************/
 
-/****************************************************************************
- * Included Files
- ****************************************************************************/
-
-#include <nuttx/config.h>
-#ifdef CONFIG_PSEUDOTERM
-#include <nuttx/serial/pty.h>
+#ifdef CONFIG_FS_LITTLEFS
+mount -t littlefs -o autoformat /dev/persist /persist
+mount -t littlefs -o autoformat /dev/data /data
 #endif
 
-#include <arch/board/board.h>
-
-#ifdef CONFIG_U2_RI5CY
-
-/****************************************************************************
- * Public Functions
- ****************************************************************************/
-
-void board_earlyinitialize(void)
-{
-}
-
-void board_lateinitialize(void)
-{
-#ifdef CONFIG_PSEUDOTERM
-  pty_register(0);
-#endif
-}
-
-void board_finalinitialize(void)
-{
-}
-
+#ifdef CONFIG_BT_CONTROLLER_WITHOUT_HOST
+btc
 #endif

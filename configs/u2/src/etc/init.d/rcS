@@ -42,8 +42,8 @@ set +e
 #  include "rcS.ap"
 #elif CONFIG_U2_AUDIO
 #  include "rcS.audio"
-#elif CONFIG_U2_RI5CY
-#  include "rcS.ri5cy"
+#elif CONFIG_U2_M4
+#  include "rcS.m4"
 #else
 #  error "unknow u2 config"
 #endif

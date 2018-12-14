@@ -1,5 +1,5 @@
 ############################################################################
-# configs/u2/ap/Make.defs
+# configs/u2/m4/Make.defs
 #
 #   Copyright (C) 2017 Pinecone Inc. All rights reserved.
 #   Author: Wang Yanjiong <wangyanjiong@pinecone.net>
@@ -35,6 +35,6 @@
 
 include ${TOPDIR}/.config
 include ${TOPDIR}/tools/Config.mk
-include ${TOPDIR}/arch/risc-v/src/song/Toolchain.defs
+include ${TOPDIR}/arch/arm/src/song/Toolchain.defs
 
-LDSCRIPT = $(TOPDIR)/configs/song/u2/ri5cy/ld.script
+LDSCRIPT = $(TOPDIR)/configs/song/u2/m4/ld.script

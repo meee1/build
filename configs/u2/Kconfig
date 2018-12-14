@@ -12,7 +12,7 @@ config U2_AP
 config U2_AUDIO
 	bool "U2 Audio"
 
-config U2_RI5CY
-	bool "U2 Ri5cy"
+config U2_M4
+	bool "U2 M4"
 
 endchoice

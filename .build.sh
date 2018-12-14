@@ -48,7 +48,7 @@ CONFIGS=(\
 		"
 		u2/ap
 		u2/audio
-		u2/ri5cy
+		u2/m4
 		" \
 		"
 		v1/vision

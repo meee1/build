@@ -1,5 +1,5 @@
 /****************************************************************************
- * configs/u2/ri5cy/ld.script
+ * configs/u2/m4/ld.script
  *
  *   Copyright (C) 2017 Pinecone Inc. All rights reserved.
  *   Author: Wang Yanjiong <wangyanjiong@pinecone.net>
@@ -35,7 +35,8 @@
 
 MEMORY
 {
-	sram (rwx) : ORIGIN = 0x60000000, LENGTH = 1024K
+	tcm (rx)    : ORIGIN = 0x01000000, LENGTH = 512K
+	shram0 (rw) : ORIGIN = 0x60000000, LENGTH = 128K
 }
 
 ENTRY(_stext)
@@ -50,9 +51,7 @@ SECTIONS
 		/* image magic */
 		LONG(0x21494350)
 		LONG(_stext)
-		LONG(_edata - _stext)
-		LONG(0)
-		LONG(_stext + 0x80)
+		LONG(_etcm - _stext)
 
 		*(.text .text.*)
 		*(.fixup)
@@ -65,43 +64,60 @@ SECTIONS
 		*(.gcc_except_table)
 		*(.gnu.linkonce.r.*)
 		_etext = ABSOLUTE(.);
-	} > sram
+	} > tcm
 
 	.init_section : {
 		_sinit = ABSOLUTE(.);
 		KEEP(*(.init_array .init_array.*))
 		_einit = ABSOLUTE(.);
-	} > sram
+	} > tcm
 
 	.ARM.extab : {
 		*(.ARM.extab*)
-	} > sram
+	} > tcm
 
 	__exidx_start = ABSOLUTE(.);
 	.ARM.exidx : {
 		*(.ARM.exidx*)
-	} > sram
+	} > tcm
 	__exidx_end = ABSOLUTE(.);
+
+	.copy.table : {
+		_scopytable = ABSOLUTE(.);
+		LONG(LOADADDR(.resource_table.adsp))
+		LONG(ADDR(.resource_table.adsp))
+		LONG(ADDR(.resource_table.adsp) + SIZEOF(.resource_table.adsp))
+		_ecopytable = ABSOLUTE(.);
+	} > tcm
 
 	_eronly = LOADADDR(.data);
 	.data : {
 		_sdata = ABSOLUTE(.);
-		*(.data .data.* .sdata .sdata.*)
+		*(.data .data.*)
 		*(.gnu.linkonce.d.*)
 		CONSTRUCTORS
 		_edata = ABSOLUTE(.);
-	} > sram
+	} > shram0 AT > tcm
 
 	.bss : {
 		_sbss = ABSOLUTE(.);
-		*(.bss .bss.* .sbss .sbss.*)
+		*(.bss .bss.*)
 		*(.gnu.linkonce.b.*)
-		*(COM*)
+		*(COMMON)
 		. = ALIGN(8);
 		_ebss = ABSOLUTE(.);
-	} > sram
+	} > shram0
 
-	_eheap = ORIGIN(sram) + LENGTH(sram);
+	_eheap = ORIGIN(shram0) + LENGTH(shram0) - 4096;
+
+	.resource_table.adsp (_eheap) : {
+		*(.resource_table.adsp)
+	} > shram0 AT > tcm
+
+	_etcm = LOADADDR(.resource_table.adsp) + SIZEOF(.resource_table.adsp);
+
+	_sheap2 = _etcm;
+	_eheap2 = ORIGIN(tcm) + LENGTH(tcm);
 
 	/* Stabs debugging sections. */
 	.stab 0 : { *(.stab) }
