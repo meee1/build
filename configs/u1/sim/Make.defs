@@ -46,9 +46,8 @@ ifneq ($(CONFIG_DEBUG_NOOPT),y)
   ARCHOPTIMIZATION += -O2
 endif
 
-ARCHCPUFLAGS = -fno-builtin
-ARCHCPUFLAGSXX = -fno-builtin -fno-exceptions -fcheck-new -fno-rtti
-ARCHPICFLAGS = -fpic
+ARCHCPUFLAGS = -D__NuttX__ -fno-builtin -U__linux__
+ARCHCPUFLAGSXX = -D__NuttX__ -fno-builtin -nostdinc++ -std=c++11 -U__linux__
 ARCHWARNINGS = -Wall -Wstrict-prototypes -Wshadow -Wundef
 ARCHWARNINGSXX = -Wall -Wshadow -Wundef
 ARCHDEFINES =
@@ -99,7 +98,7 @@ OBJDUMP = $(CROSSDEV)objdump
 CFLAGS = $(ARCHWARNINGS) $(ARCHOPTIMIZATION) \
    $(ARCHCPUFLAGS) $(ARCHINCLUDES) $(ARCHDEFINES) $(EXTRADEFINES) -pipe
 CXXFLAGS = $(ARCHWARNINGSXX) $(ARCHOPTIMIZATION) $(ARCHXXINCLUDES) \
-   $(ARCHCPUFLAGSXX) $(ARCHINCLUDESXX) $(ARCHDEFINESXX) $(EXTRADEFINES) -fpermissive -pipe
+   $(ARCHCPUFLAGSXX) $(ARCHINCLUDESXX) $(ARCHDEFINESXX) $(EXTRADEFINES) -pipe
 CPPFLAGS = $(ARCHINCLUDES) $(ARCHDEFINES) $(EXTRADEFINES)
 AFLAGS = $(CFLAGS) -D__ASSEMBLY__
 
@@ -111,11 +110,10 @@ CXXELFFLAGS = $(CXXFLAGS)
 
 LDELFFLAGS = -r -e main
 ifeq ($(WINTOOL),y)
-  LDELFFLAGS += -T "${shell cygpath -w $(TOPDIR)/configs/song/u1/sim/gnu-elf.ld}"
+  LDELFFLAGS += -T "${shell cygpath -w $(TOPDIR)/binfmt/libelf/gnu-elf.ld}"
 else
-  LDELFFLAGS += -T $(TOPDIR)/configs/song/u1/sim/gnu-elf.ld
+  LDELFFLAGS += -T $(TOPDIR)/binfmt/libelf/gnu-elf.ld
 endif
-
 
 ASMEXT = .S
 OBJEXT = .o
