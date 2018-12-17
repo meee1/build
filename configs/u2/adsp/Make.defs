@@ -1,5 +1,5 @@
 ############################################################################
-# configs/u2/audio/Make.defs
+# configs/u2/adsp/Make.defs
 #
 #   Copyright (C) 2018 Pinecone Inc. All rights reserved.
 #   Author: Xiang Xiao <xiaoxiang@pinecone.net>
@@ -37,4 +37,4 @@ include ${TOPDIR}/.config
 include ${TOPDIR}/tools/Config.mk
 include ${TOPDIR}/arch/ceva/src/song/Toolchain.defs
 
-LDSCRIPT = $(TOPDIR)/configs/song/u2/audio/ld.lnk
+LDSCRIPT = $(TOPDIR)/configs/song/u2/adsp/ld.lnk

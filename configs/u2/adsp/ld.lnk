@@ -1,5 +1,5 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-; configs/u2/audio/ld.lnk
+; configs/u2/adsp/ld.lnk
 ;
 ;   Copyright (C) 2018 Pinecone Inc. All rights reserved.
 ;   Author: Xiang Xiao <xiaoxiang@pinecone.net>

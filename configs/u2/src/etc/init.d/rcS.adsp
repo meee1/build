@@ -1,8 +1,8 @@
 /****************************************************************************
- * configs/u2/src/audio.c
+ * configs/u2/src/init.d/rcS.adsp
  *
  *   Copyright (C) 2018 Pinecone Inc. All rights reserved.
- *   Author: Xiang Xiao <xiaoxiang@pinecone.net>
+ *   Author: Pinecone <Pinecone@pinecone.net>
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
@@ -33,30 +33,7 @@
  *
  ****************************************************************************/
 
-/****************************************************************************
- * Included Files
- ****************************************************************************/
-
-#include <nuttx/config.h>
-
-#include <arch/board/board.h>
-
-#ifdef CONFIG_U2_AUDIO
-
-/****************************************************************************
- * Public Functions
- ****************************************************************************/
-
-void board_earlyinitialize(void)
-{
-}
-
-void board_lateinitialize(void)
-{
-}
-
-void board_finalinitialize(void)
-{
-}
-
+#ifdef CONFIG_FS_HOSTFS_RPMSG
+mount -t hostfs -o fs=/persist /persist
+mount -t hostfs -o fs=/data /data
 #endif

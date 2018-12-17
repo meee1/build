@@ -40,8 +40,8 @@ set +e
 
 #ifdef CONFIG_U2_AP
 #  include "rcS.ap"
-#elif CONFIG_U2_AUDIO
-#  include "rcS.audio"
+#elif CONFIG_U2_ADSP
+#  include "rcS.adsp"
 #elif CONFIG_U2_M4
 #  include "rcS.m4"
 #else
