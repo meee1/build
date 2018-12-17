@@ -1,5 +1,5 @@
 /****************************************************************************
- * configs/u2/src/init.d/rcS
+ * configs/u2/src/init.d/rcS.ck
  *
  *   Copyright (C) 2018 Pinecone Inc. All rights reserved.
  *   Author: Pinecone <Pinecone@pinecone.net>
@@ -32,22 +32,12 @@
  * POSSIBILITY OF SUCH DAMAGE.
  *
  ****************************************************************************/
-set +e
 
-#include <nuttx/config.h>
-
-#include "rcS.first"
-
-#ifdef CONFIG_U2_AP
-#  include "rcS.ap"
-#elif CONFIG_U2_ADSP
-#  include "rcS.adsp"
-#elif CONFIG_U2_CK
-#  include "rcS.ck"
-#elif CONFIG_U2_M4
-#  include "rcS.m4"
-#else
-#  error "unknow u2 config"
+#ifdef CONFIG_FS_LITTLEFS
+mount -t littlefs -o autoformat /dev/persist /persist
+mount -t littlefs -o autoformat /dev/data /data
 #endif
 
-#include "rcS.last"
+#ifdef CONFIG_BT_CONTROLLER_WITHOUT_HOST
+btc
+#endif
