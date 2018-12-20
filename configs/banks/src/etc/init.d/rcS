@@ -44,8 +44,6 @@ set +e
 #  include "rcS.sensor"
 #elif CONFIG_BANKS_RPM
 #  include "rcS.rpm"
-#elif CONFIG_BANKS_VISION
-#  include "rcS.vision"
 #else
 #  error "unknow banks config"
 #endif
