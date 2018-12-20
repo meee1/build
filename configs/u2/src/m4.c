@@ -43,6 +43,10 @@
 #endif
 
 #include <arch/board/board.h>
+#ifdef CONFIG_DEV_GPIO
+#include <arch/chip/chip.h>
+#include <nuttx/ioexpander/gpio.h>
+#endif
 
 #ifdef CONFIG_U2_M4
 
@@ -58,6 +62,12 @@ void board_lateinitialize(void)
 {
 #ifdef CONFIG_PSEUDOTERM
   pty_register(0);
+#endif
+
+#ifdef CONFIG_DEV_GPIO
+  (void)gpio_lower_half(g_ioe[0], 0, GPIO_INPUT_PIN, 0);
+  (void)gpio_lower_half(g_ioe[0], 4, GPIO_INPUT_PIN, 4);
+  (void)gpio_lower_half(g_ioe[0], 5, GPIO_INPUT_PIN, 5);
 #endif
 }
 
