@@ -35,8 +35,7 @@
 
 MEMORY
 {
-	iram (rwx) : ORIGIN = 0x00000000, LENGTH = 96K
-	dram (rw) : ORIGIN = 0x00018000, LENGTH = 32K
+	sram (rwx) : ORIGIN = 0x00000000, LENGTH = 128K
 }
 
 ENTRY(_stext)
@@ -66,13 +65,13 @@ SECTIONS
 		*(.gcc_except_table)
 		*(.gnu.linkonce.r.*)
 		_etext = ABSOLUTE(.);
-	} > iram
+	} > sram
 
 	.init_section : {
 		_sinit = ABSOLUTE(.);
 		KEEP(*(.init_array .init_array.*))
 		_einit = ABSOLUTE(.);
-	} > iram
+	} > sram
 
 	_eronly = LOADADDR(.data);
 
@@ -82,7 +81,7 @@ SECTIONS
 		*(.gnu.linkonce.d.*)
 		CONSTRUCTORS
 		_edata = ABSOLUTE(.);
-	} > dram
+	} > sram
 
 	.bss : {
 		_sbss = ABSOLUTE(.);
@@ -91,9 +90,9 @@ SECTIONS
 		*(COM*)
 		. = ALIGN(8);
 		_ebss = ABSOLUTE(.);
-	} > dram
+	} > sram
 
-	_eheap = ORIGIN(dram) + LENGTH(dram);
+	_eheap = ORIGIN(sram) + LENGTH(sram);
 
 	/* Stabs debugging sections. */
 	.stab 0 : { *(.stab) }
