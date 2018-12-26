@@ -1,8 +1,8 @@
 /****************************************************************************
- * configs/banks/src/init.d/rcS
+ * configs/banks/src/init.d/rcS.cp
  *
  *   Copyright (C) 2018 Pinecone Inc. All rights reserved.
- *   Author: Pinecone <Pinecone@pinecone.net>
+ *   Author: Yuan Zhang <zhangyuan7@pinecone.net>
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
@@ -32,22 +32,3 @@
  * POSSIBILITY OF SUCH DAMAGE.
  *
  ****************************************************************************/
-set +e
-
-#include <nuttx/config.h>
-
-#include "rcS.first"
-
-#ifdef CONFIG_BANKS_AUDIO
-#  include "rcS.audio"
-#elif CONFIG_BANKS_CP
-#  include "rcS.cp"
-#elif CONFIG_BANKS_SENSOR
-#  include "rcS.sensor"
-#elif CONFIG_BANKS_RPM
-#  include "rcS.rpm"
-#else
-#  error "unknow banks config"
-#endif
-
-#include "rcS.last"

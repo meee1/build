@@ -1,8 +1,8 @@
 ############################################################################
-# configs/banks/src/Makefile
+# configs/banks/cp/Make.defs
 #
-#   Copyright (C) 2017 Pinecone Inc. All rights reserved.
-#   Author: Xiang Xiao <xiaoxiang@pinecone.net>
+#   Copyright (C) 2018 Pinecone Inc. All rights reserved.
+#   Author: Yuan Zhang <zhangyuan7@pinecone.net>
 #
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions
@@ -33,9 +33,8 @@
 #
 ############################################################################
 
--include $(TOPDIR)/Make.defs
-CSRCS  := audio.c cp.c rpm.c sensor.c
-RCSRCS := rcS
-VPATH += :etc/init.d
-DEPPATH += --dep-path etc/init.d
-include $(TOPDIR)/configs/Board.mk
+include ${TOPDIR}/.config
+include ${TOPDIR}/tools/Config.mk
+include ${TOPDIR}/arch/arm/src/song/Toolchain.defs
+
+LDSCRIPT = $(TOPDIR)/configs/song/banks/cp/ld.script

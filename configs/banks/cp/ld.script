@@ -1,8 +1,8 @@
 /****************************************************************************
- * configs/banks/src/init.d/rcS
+ * configs/banks/cp/ld.script
  *
- *   Copyright (C) 2018 Pinecone Inc. All rights reserved.
- *   Author: Pinecone <Pinecone@pinecone.net>
+ *   Copyright (C) 2017 Pinecone Inc. All rights reserved.
+ *   Author: Yuan Zhang <zhangyuan7@pinecone.net>
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
@@ -32,22 +32,82 @@
  * POSSIBILITY OF SUCH DAMAGE.
  *
  ****************************************************************************/
-set +e
 
-#include <nuttx/config.h>
+MEMORY
+{
+	sdram (rwx) :  ORIGIN = 0x00000000, LENGTH = 100M
+}
 
-#include "rcS.first"
+ENTRY(_stext)
+SECTIONS
+{
+	.text : {
+		_stext = ABSOLUTE(.);
+		KEEP(*(.vectors))
+		*(.text .text.*)
+		*(.fixup)
+		*(.gnu.warning)
+		*(.rodata .rodata.*)
+		*(.gnu.linkonce.t.*)
+		*(.glue_7)
+		*(.glue_7t)
+		*(.got)
+		*(.gcc_except_table)
+		*(.gnu.linkonce.r.*)
+		_etext = ABSOLUTE(.);
+	} > sdram
 
-#ifdef CONFIG_BANKS_AUDIO
-#  include "rcS.audio"
-#elif CONFIG_BANKS_CP
-#  include "rcS.cp"
-#elif CONFIG_BANKS_SENSOR
-#  include "rcS.sensor"
-#elif CONFIG_BANKS_RPM
-#  include "rcS.rpm"
-#else
-#  error "unknow banks config"
-#endif
+	.init_section : {
+		_sinit = ABSOLUTE(.);
+		KEEP(*(.init_array .init_array.*))
+		_einit = ABSOLUTE(.);
+	} > sdram
 
-#include "rcS.last"
+	.ARM.extab : {
+		*(.ARM.extab*)
+	} > sdram
+
+	__exidx_start = ABSOLUTE(.);
+	.ARM.exidx : {
+		*(.ARM.exidx*)
+	} > sdram
+	__exidx_end = ABSOLUTE(.);
+
+	_eronly = LOADADDR(.data);
+	.data : {
+		_sdata = ABSOLUTE(.);
+		*(.data .data.*)
+		*(.gnu.linkonce.d.*)
+		CONSTRUCTORS
+		_edata = ABSOLUTE(.);
+	} > sdram
+
+	.bss : {
+		_sbss = ABSOLUTE(.);
+		*(.bss .bss.*)
+		*(.gnu.linkonce.b.*)
+		*(COMMON)
+		. = ALIGN(8);
+		_ebss = ABSOLUTE(.);
+	} > sdram
+
+	_eheap = _slog;
+
+	_slog = _elog - _logsize;
+	_elog = ORIGIN(sdram) + LENGTH(sdram);
+	_logsize = 4096;
+
+	/* Stabs debugging sections. */
+	.stab 0 : { *(.stab) }
+	.stabstr 0 : { *(.stabstr) }
+	.stab.excl 0 : { *(.stab.excl) }
+	.stab.exclstr 0 : { *(.stab.exclstr) }
+	.stab.index 0 : { *(.stab.index) }
+	.stab.indexstr 0 : { *(.stab.indexstr) }
+	.comment 0 : { *(.comment) }
+	.debug_abbrev 0 : { *(.debug_abbrev) }
+	.debug_info 0 : { *(.debug_info) }
+	.debug_line 0 : { *(.debug_line) }
+	.debug_pubnames 0 : { *(.debug_pubnames) }
+	.debug_aranges 0 : { *(.debug_aranges) }
+}

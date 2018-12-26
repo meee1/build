@@ -9,6 +9,9 @@ choice
 config BANKS_AUDIO
 	bool "Banks Audio"
 
+config BANKS_CP
+	bool "Banks CP"
+
 config BANKS_RPM
 	bool "Banks RPM"
 

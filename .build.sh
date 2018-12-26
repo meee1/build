@@ -36,6 +36,7 @@ CONFIGS=(\
 		" \
 		"
 		banks/audio
+		banks/cp
 		banks/rpm
 		banks/sensor
 		banks/vision
