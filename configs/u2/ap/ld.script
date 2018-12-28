@@ -52,8 +52,7 @@ SECTIONS
 		LONG(0x21494350)
 		LONG(_stext)
 		LONG(_edata - _stext)
-		LONG(0)
-		LONG(_stext + 0x80)
+		LONG(__start)
 
 		*(.text .text.*)
 		*(.fixup)

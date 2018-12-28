@@ -52,6 +52,7 @@ SECTIONS
 		LONG(0x21494350)
 		LONG(_stext)
 		LONG(_eflash - _stext)
+		LONG(__start)
 
 		*(.text .text.*)
 		*(.fixup)
