@@ -44,16 +44,6 @@ SECTIONS
 	.text : {
 		_stext = ABSOLUTE(.);
 		KEEP(*(.vectors))
-
-		/* explictly specify the offset of link tags */
-		. = 0x400;
-		/* image magic */
-		LONG(0x21494350)
-		LONG(_stext)
-		LONG(_edata - _stext)
-		LONG(0)
-		LONG(_stext + 0x80)
-
 		*(.text .text.*)
 		*(.fixup)
 		*(.gnu.warning)
