@@ -38,6 +38,7 @@ MEMORY
 	sram (rwx) : ORIGIN = 0x00000000, LENGTH = 256K
 }
 
+OUTPUT_FORMAT("elf32-littleriscv")
 ENTRY(_stext)
 SECTIONS
 {
@@ -64,7 +65,6 @@ SECTIONS
 	} > sram
 
 	_eronly = LOADADDR(.data);
-
 	.data : {
 		_sdata = ABSOLUTE(.);
 		*(.data .data.* .sdata .sdata.*)
