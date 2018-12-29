@@ -74,16 +74,6 @@ SECTIONS
 		_einit = ABSOLUTE(.);
 	} > sram
 
-	.ARM.extab : {
-		*(.ARM.extab*)
-	} > sram
-
-	__exidx_start = ABSOLUTE(.);
-	.ARM.exidx : {
-		*(.ARM.exidx*)
-	} > sram
-	__exidx_end = ABSOLUTE(.);
-
 	_eronly = LOADADDR(.data);
 	.data : {
 		_sdata = ABSOLUTE(.);
