@@ -37,6 +37,7 @@ MEMORY
 {
 	tcm (rx)    : ORIGIN = 0x01000000, LENGTH = 512K
 	shram0 (rw) : ORIGIN = 0x60000000, LENGTH = 128K
+	shram1 (rw) : ORIGIN = 0x60100000, LENGTH = 512K
 }
 
 ENTRY(_stext)
@@ -119,6 +120,9 @@ SECTIONS
 
 	_sheap2 = _etcm;
 	_eheap2 = ORIGIN(tcm) + LENGTH(tcm);
+
+	_sheap3 = ORIGIN(shram1);
+	_eheap3 = ORIGIN(shram1) + LENGTH(shram1);
 
 	/* Stabs debugging sections. */
 	.stab 0 : { *(.stab) }
