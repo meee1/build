@@ -46,8 +46,9 @@ CONFIGS=(\
 		u1/sp
 		" \
 		"
-		u2/adsp
 		u2/ap
+		u2/audio
+		u2/ck
 		u2/m4
 		" \
 		"

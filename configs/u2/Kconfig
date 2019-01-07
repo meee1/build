@@ -9,8 +9,8 @@ choice
 config U2_AP
 	bool "U2 AP"
 
-config U2_ADSP
-	bool "U2 Audio DSP"
+config U2_AUDIO
+	bool "U2 Audio"
 
 config U2_CK
 	bool "U2 CK"

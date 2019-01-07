@@ -1,8 +1,8 @@
 /****************************************************************************
- * configs/u2/src/init.d/rcS
+ * configs/u2/src/audio.c
  *
- *   Copyright (C) 2018 Pinecone Inc. All rights reserved.
- *   Author: Pinecone <Pinecone@pinecone.net>
+ *   Copyright (C) 2019 Pinecone Inc. All rights reserved.
+ *   Author: Xiang Xiao <xiaoxiang@pinecone.net>
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
@@ -32,22 +32,31 @@
  * POSSIBILITY OF SUCH DAMAGE.
  *
  ****************************************************************************/
-set +e
+
+/****************************************************************************
+ * Included Files
+ ****************************************************************************/
 
 #include <nuttx/config.h>
 
-#include "rcS.first"
+#include <arch/board/board.h>
 
-#ifdef CONFIG_U2_AP
-#  include "rcS.ap"
-#elif CONFIG_U2_AUDIO
-#  include "rcS.audio"
-#elif CONFIG_U2_CK
-#  include "rcS.ck"
-#elif CONFIG_U2_M4
-#  include "rcS.m4"
-#else
-#  error "unknow u2 config"
+#ifdef CONFIG_U2_AUDIO
+
+/****************************************************************************
+ * Public Functions
+ ****************************************************************************/
+
+void board_earlyinitialize(void)
+{
+}
+
+void board_lateinitialize(void)
+{
+}
+
+void board_finalinitialize(void)
+{
+}
+
 #endif
-
-#include "rcS.last"
