@@ -34,7 +34,7 @@
 ############################################################################
 
 -include $(TOPDIR)/Make.defs
-CSRCS  := ap.c adsp.c ck.c m4.c
+CSRCS  := ap.c ck.c m4.c
 RCSRCS := rcS
 VPATH += :etc/init.d
 DEPPATH += --dep-path etc/init.d
