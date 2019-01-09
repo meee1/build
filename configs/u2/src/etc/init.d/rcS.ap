@@ -39,5 +39,5 @@ mount -t littlefs -o autoformat /dev/data /data
 #endif
 
 #ifdef CONFIG_BT_CONTROLLER_WITHOUT_HOST
-btc
+btc &
 #endif
