@@ -34,9 +34,11 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 classes:
 	data	[D:00000000, D:0007ffff] internal ;[0xfd800000, 0xfd87ffff] 512KB
-	code	[C:00000000, C:0001ffff] internal ;[0xfda00000, 0xfda1ffff] 128KB
+	code	[C:00000000, C:0000ffff] internal ;[0xfda00000, 0xfda10000] 64KB
+	ddr_code [C:E1100000, C:E31fffff] external;
+	ddr_data [D:E3300000, D:E337ffff] external;
 
-data:
+ddr_data:
 	const_data
 	__eronly symbol
 	__sdata symbol
@@ -47,7 +49,7 @@ data:
 	__ebss symbol
 	__eheap at hi symbol
 
-code:
+ddr_code:
 	__stext symbol
 	inttbl
 	.text
