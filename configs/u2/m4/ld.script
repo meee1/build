@@ -35,7 +35,7 @@
 
 MEMORY
 {
-	tcm (rx)    : ORIGIN = 0x01000000, LENGTH = 512K
+	sram (rx)   : ORIGIN = 0x01000000, LENGTH = 512K
 	shram0 (rw) : ORIGIN = 0x60000000, LENGTH = 128K
 	shram1 (rw) : ORIGIN = 0x60100000, LENGTH = 512K
 }
@@ -52,7 +52,7 @@ SECTIONS
 		/* image magic */
 		LONG(0x21494350)
 		LONG(_stext)
-		LONG(_etcm - _stext)
+		LONG(_edata - _stext)
 		LONG(__start)
 
 		*(.text .text.*)
@@ -66,31 +66,23 @@ SECTIONS
 		*(.gcc_except_table)
 		*(.gnu.linkonce.r.*)
 		_etext = ABSOLUTE(.);
-	} > tcm
+	} > sram
 
 	.init_section : {
 		_sinit = ABSOLUTE(.);
 		KEEP(*(.init_array .init_array.*))
 		_einit = ABSOLUTE(.);
-	} > tcm
+	} > sram
 
 	.ARM.extab : {
 		*(.ARM.extab*)
-	} > tcm
+	} > sram
 
 	__exidx_start = ABSOLUTE(.);
 	.ARM.exidx : {
 		*(.ARM.exidx*)
-	} > tcm
+	} > sram
 	__exidx_end = ABSOLUTE(.);
-
-	.copy.table : {
-		_scopytable = ABSOLUTE(.);
-		LONG(LOADADDR(.resource_table.adsp))
-		LONG(ADDR(.resource_table.adsp))
-		LONG(ADDR(.resource_table.adsp) + SIZEOF(.resource_table.adsp))
-		_ecopytable = ABSOLUTE(.);
-	} > tcm
 
 	_eronly = LOADADDR(.data);
 	.data : {
@@ -99,7 +91,7 @@ SECTIONS
 		*(.gnu.linkonce.d.*)
 		CONSTRUCTORS
 		_edata = ABSOLUTE(.);
-	} > shram0 AT > tcm
+	} > sram
 
 	.bss : {
 		_sbss = ABSOLUTE(.);
@@ -108,18 +100,12 @@ SECTIONS
 		*(COMMON)
 		. = ALIGN(8);
 		_ebss = ABSOLUTE(.);
-	} > shram0
+	} > sram
 
-	_eheap = ORIGIN(shram0) + LENGTH(shram0) - 4096;
+	_eheap = ORIGIN(sram) + LENGTH(sram);
 
-	.resource_table.adsp (_eheap) : {
-		*(.resource_table.adsp)
-	} > shram0 AT > tcm
-
-	_etcm = LOADADDR(.resource_table.adsp) + SIZEOF(.resource_table.adsp);
-
-	_sheap2 = _etcm;
-	_eheap2 = ORIGIN(tcm) + LENGTH(tcm);
+	_sheap2 = ORIGIN(shram0);
+	_eheap2 = ORIGIN(shram0) + LENGTH(shram0);
 
 	_sheap3 = ORIGIN(shram1);
 	_eheap3 = ORIGIN(shram1) + LENGTH(shram1);
