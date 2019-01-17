@@ -48,6 +48,9 @@ endif
 
 ARCHCPUFLAGS = -D__NuttX__ -fno-builtin -U__linux__
 ARCHCPUFLAGSXX = -D__NuttX__ -fno-builtin -nostdinc++ -std=c++11 -U__linux__
+ifneq ($(CONFIG_CXX_EXCEPTION),y)
+  ARCHCPUFLAGSXX += -fno-exceptions -fcheck-new -fno-rtti
+endif
 ARCHWARNINGS = -Wall -Wstrict-prototypes -Wshadow -Wundef
 ARCHWARNINGSXX = -Wall -Wshadow -Wundef
 ARCHDEFINES =
