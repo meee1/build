@@ -39,5 +39,5 @@ ln -s data persist
 #endif
 
 #ifdef CONFIG_RPMSG_USRSOCK
-usrsock
+usrsock &
 #endif

@@ -37,6 +37,7 @@
 mount -t hostfs -o fs=/persist /persist
 mount -t hostfs -o fs=/data /data
 #endif
+
 #ifdef CONFIG_NBIOT_MODEM
-nbiot
+nbiot &
 #endif

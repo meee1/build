@@ -39,11 +39,11 @@ mount -t hostfs -o fs=/data /data
 #endif
 
 #ifdef CONFIG_SERVICES_ATCMD
-atcmd
+atcmd &
 #endif
 
 #ifdef CONFIG_RPMSG_USRSOCK
-usrsock sp
+usrsock sp &
 #endif
 
 #if defined(CONFIG_PM) && !defined(CONFIG_NSH_DISABLE_PMCONFIG)

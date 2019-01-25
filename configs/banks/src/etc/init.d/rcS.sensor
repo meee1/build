@@ -34,5 +34,5 @@
  ****************************************************************************/
 
 #ifdef CONFIG_RPMSG_USRSOCK
-usrsock ap
+usrsock ap &
 #endif
