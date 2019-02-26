@@ -35,7 +35,8 @@
 
 MEMORY
 {
-	sdram (rwx) :  ORIGIN = 0x00000000, LENGTH = 100M
+	sdram (rwx)   :  ORIGIN = 0x00000000, LENGTH = 100M
+	bootram (rwx) :  ORIGIN = 0xFFFF0000, LENGTH = 4K
 }
 
 ENTRY(_stext)
@@ -96,6 +97,10 @@ SECTIONS
 	_slog = _elog - _logsize;
 	_elog = ORIGIN(sdram) + LENGTH(sdram);
 	_logsize = 4096;
+
+	.bootram : {
+		KEEP(*(.bootram))
+	} > bootram
 
 	/* Stabs debugging sections. */
 	.stab 0 : { *(.stab) }
