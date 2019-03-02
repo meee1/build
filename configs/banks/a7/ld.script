@@ -33,9 +33,11 @@
  *
  ****************************************************************************/
 
+#include <nuttx/config.h>
+
 MEMORY
 {
-	sdram (rwx)   :  ORIGIN = 0x00000000, LENGTH = 100M
+	sdram (rwx)   :  ORIGIN = 0x00000000, LENGTH = CONFIG_RAM_SIZE
 	bootram (rwx) :  ORIGIN = 0xFFFF0000, LENGTH = 4K
 }
 
@@ -95,8 +97,12 @@ SECTIONS
 	_eheap = _slog;
 
 	_slog = _elog - _logsize;
-	_elog = ORIGIN(sdram) + LENGTH(sdram);
+	_elog = _spgtable;
 	_logsize = 4096;
+
+	_spgtable = _epgtable - _pgtablesize;
+	_epgtable = ORIGIN(sdram) + LENGTH(sdram);
+	_pgtablesize = 0x4000;
 
 	.bootram : {
 		KEEP(*(.bootram))
