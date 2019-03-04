@@ -33,6 +33,15 @@
  *
  ****************************************************************************/
 
+#if defined(CONFIG_RPMSG_USRSOCK) && \
+    defined(CONFIG_FS_HOSTFS_RPMSG) && \
+    defined(CONFIG_NSH_PROC_MOUNTPOINT)
+umount CONFIG_NSH_PROC_MOUNTPOINT
+mount -t procfs /proc1
+mount -t hostfs -o fs=/proc/net /net2
+mount -t unionfs -o fspath1=/proc1,fspath2=/net2,prefix2=net CONFIG_NSH_PROC_MOUNTPOINT
+#endif
+
 #ifdef CONFIG_FS_HOSTFS_RPMSG
 mount -t hostfs -o fs=/persist /persist
 mount -t hostfs -o fs=/data /data
