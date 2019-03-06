@@ -40,8 +40,8 @@ set +e
 
 #ifdef CONFIG_BANKS_AUDIO
 #  include "rcS.audio"
-#elif CONFIG_BANKS_CP
-#  include "rcS.cp"
+#elif CONFIG_BANKS_A7
+#  include "rcS.a7"
 #elif CONFIG_BANKS_SENSOR
 #  include "rcS.sensor"
 #elif CONFIG_BANKS_RPM

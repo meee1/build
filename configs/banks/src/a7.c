@@ -1,5 +1,5 @@
 /****************************************************************************
- * configs/banks/src/init.d/rcS.cp
+ * configs/banks/src/a7.c
  *
  *   Copyright (C) 2018 Pinecone Inc. All rights reserved.
  *   Author: Yuan Zhang <zhangyuan7@pinecone.net>
@@ -32,3 +32,31 @@
  * POSSIBILITY OF SUCH DAMAGE.
  *
  ****************************************************************************/
+
+/****************************************************************************
+ * Included Files
+ ****************************************************************************/
+
+#include <nuttx/config.h>
+
+#include <arch/board/board.h>
+
+#ifdef CONFIG_BANKS_A7
+
+/****************************************************************************
+ * Public Functions
+ ****************************************************************************/
+
+void board_earlyinitialize(void)
+{
+}
+
+void board_lateinitialize(void)
+{
+}
+
+void board_finalinitialize(void)
+{
+}
+
+#endif

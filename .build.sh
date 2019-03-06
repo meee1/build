@@ -35,8 +35,8 @@ CONFIGS=(\
 		abies/audio
 		" \
 		"
+		banks/a7
 		banks/audio
-		banks/cp
 		banks/rpm
 		banks/sensor
 		banks/vision

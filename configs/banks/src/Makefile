@@ -34,7 +34,7 @@
 ############################################################################
 
 -include $(TOPDIR)/Make.defs
-CSRCS  := audio.c cp.c rpm.c sensor.c
+CSRCS  := a7.c audio.c rpm.c sensor.c
 RCSRCS := rcS
 VPATH += :etc/init.d
 DEPPATH += --dep-path etc/init.d

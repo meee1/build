@@ -6,11 +6,11 @@
 choice
 	prompt "Select target application"
 
+config BANKS_A7
+	bool "Banks A7"
+
 config BANKS_AUDIO
 	bool "Banks Audio"
-
-config BANKS_CP
-	bool "Banks CP"
 
 config BANKS_RPM
 	bool "Banks RPM"
