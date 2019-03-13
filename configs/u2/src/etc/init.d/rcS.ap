@@ -41,3 +41,7 @@ mount -t littlefs -o autoformat /dev/data /data
 #ifdef CONFIG_BT_CONTROLLER_WITHOUT_HOST
 btc &
 #endif
+
+#if defined(CONFIG_RPTUN) && !defined(CONFIG_NSH_DISABLE_RPTUN)
+rptun start /dev/rptunaudio
+#endif

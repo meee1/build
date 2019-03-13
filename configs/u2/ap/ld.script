@@ -36,7 +36,6 @@
 MEMORY
 {
 	sram (rwx)  : ORIGIN = 0x60000000, LENGTH = 1024K /* 1280 - 256 */
-	shram (rwx) : ORIGIN = 0x6013f000, LENGTH = 4K
 }
 
 OUTPUT_FORMAT("elf32-littleriscv")
@@ -73,18 +72,6 @@ SECTIONS
 		KEEP(*(.init_array .init_array.*))
 		_einit = ABSOLUTE(.);
 	} > sram
-
-	.copy.table : {
-		_scopytable = ABSOLUTE(.);
-		LONG(LOADADDR(.resource_table.audio))
-		LONG(ADDR(.resource_table.audio))
-		LONG(ADDR(.resource_table.audio) + SIZEOF(.resource_table.audio))
-		_ecopytable = ABSOLUTE(.);
-	} > sram
-
-	.resource_table.audio : {
-		*(.resource_table.audio)
-	} > shram AT > sram
 
 	_eronly = LOADADDR(.data);
 	.data : {
